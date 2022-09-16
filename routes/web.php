@@ -16,3 +16,94 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+
+Route::prefix('admin')->namespace('Admin')->group(function () {
+        Route::group(['middleware' => 'AdminGuest'], function () {
+    
+            // Route::get('/login',['as'=>'admin.login','uses'=>'\App\Http\Controllers\Admin\AuthController@login']);
+            // Route::post('/attempt',['as'=>'admin.attempt','uses'=>'\App\Http\Controllers\Admin\AuthController@login_process']);
+            // Route::get('/forgotpassword',['as'=>'admin.forget_password','uses'=>'\App\Http\Controllers\Admin\AuthController@forgotPage']);
+            // Route::post('/forgotpassword_process',['as'=>'admin.forgotpassword_process','uses'=>'\App\Http\Controllers\Admin\AuthController@forgot']);
+            // Route::get('/reset-password',['as'=>'admin.password.reset','uses'=>'\App\Http\Controllers\Admin\AuthController@resetPage']);
+            // Route::post('/reset/attempt',['as'=>'admin.resetAttempt','uses'=>'\App\Http\Controllers\Admin\AuthController@resetpass']);
+            // Route::get('/register',['as'=>'admin.register','uses'=>'\App\Http\Controllers\Admin\AuthController@register']);
+            // Route::post('/register/process',['as'=>'admin.register.process','uses'=>'\App\Http\Controllers\Admin\AuthController@store']);
+        });
+    
+        Route::group(['middleware' => "AdminAuth"], function () {
+            // Route::get('/logout',['as'=>'admin.logout','uses'=>'\App\Http\Controllers\Admin\AuthController@logout']);
+            // Route::get('/profile',['as'=>'admin.profile','uses'=>'\App\Http\Controllers\Admin\ProfileController@index']);
+            // Route::post('/update_profile',['as'=>'admin.update.profile','uses'=>'\App\Http\Controllers\Admin\ProfileController@update']);
+            // Route::post('/change_password',['as'=>'admin.change.password','uses'=>'\App\Http\Controllers\Admin\ProfileController@change_password']);
+            
+        });
+});
+
+
+Route::prefix('admin')->namespace('Admin')->group(function () {
+    Route::group(['middleware' => 'AdminGuest'], function () {
+
+        // Route::get('/login',['as'=>'user.login','uses'=>'\App\Http\Controllers\User\AuthController@login']);
+        // Route::post('/attempt',['as'=>'user.attempt','uses'=>'\App\Http\Controllers\User\AuthController@login_process']);
+        // Route::get('/forgotpassword',['as'=>'user.forget_password','uses'=>'\App\Http\Controllers\User\AuthController@forgotPage']);
+        // Route::post('/forgotpassword_process',['as'=>'user.forgotpassword_process','uses'=>'\App\Http\Controllers\User\AuthController@forgot']);
+        // Route::get('/reset-password',['as'=>'user.password.reset','uses'=>'\App\Http\Controllers\User\AuthController@resetPage']);
+        // Route::post('/reset/attempt',['as'=>'user.resetAttempt','uses'=>'\App\Http\Controllers\User\AuthController@resetpass']);
+        // Route::get('/register',['as'=>'user.register','uses'=>'\App\Http\Controllers\User\AuthController@register']);
+        // Route::post('/register/process',['as'=>'user.register.process','uses'=>'\App\Http\Controllers\User\AuthController@store']);
+    });
+
+    Route::group(['middleware' => "AdminAuth"], function () {
+        // Route::get('/logout',['as'=>'user.logout','uses'=>'\App\Http\Controllers\User\AuthController@logout']);
+        // Route::get('/profile',['as'=>'user.profile','uses'=>'\App\Http\Controllers\User\ProfileController@index']);
+        // Route::post('/update_profile',['as'=>'user.update.profile','uses'=>'\App\Http\Controllers\User\ProfileController@update']);
+        // Route::post('/change_password',['as'=>'user.change.password','uses'=>'\App\Http\Controllers\User\ProfileController@change_password']);
+        
+    });
+});
+
+Route::prefix('landlord')->namespace('Landlord')->group(function () {
+    Route::group(['middleware' => 'LandlordGuest'], function () {
+
+        // Route::get('/login',['as'=>'landlord.login','uses'=>'\App\Http\Controllers\AuthController@login']);
+        // Route::post('/attempt',['as'=>'landlord.attempt','uses'=>'\App\Http\Controllers\AuthController@login_process']);
+        // Route::get('/forgotpassword',['as'=>'landlord.forget_password','uses'=>'\App\Http\Controllers\AuthController@forgotPage']);
+        // Route::post('/forgotpassword_process',['as'=>'landlord.forgotpassword_process','uses'=>'\App\Http\Controllers\AuthController@forgot']);
+        // Route::get('/reset-password',['as'=>'landlord.password.reset','uses'=>'\App\Http\Controllers\AuthController@resetPage']);
+        // Route::post('/reset/attempt',['as'=>'landlord.resetAttempt','uses'=>'\App\Http\Controllers\AuthController@resetpass']);
+        // Route::get('/register',['as'=>'landlord.register','uses'=>'\App\Http\Controllers\AuthController@register']);
+        // Route::post('/register/process',['as'=>'landlord.register.process','uses'=>'\App\Http\Controllers\AuthController@store']);
+    });
+
+    Route::group(['middleware' => "LandlordAuth"], function () {
+        // Route::get('/logout',['as'=>'landlord.logout','uses'=>'\App\Http\Controllers\Landlord\ProfileController@logout']);
+        // Route::get('/profile',['as'=>'landlord.profile','uses'=>'\App\Http\Controllers\Landlord\ProfileController@index']);
+        // Route::post('/update_profile',['as'=>'landlord.update.profile','uses'=>'\App\Http\Controllers\Landlord\ProfileController@update']);
+        // Route::post('/change_password',['as'=>'landlord.change.password','uses'=>'\App\Http\Controllers\Landlord\ProfileController@change_password']);
+        
+    });
+});
+
+
+Route::prefix('customer')->namespace('Customer')->group(function () {
+    Route::group(['middleware' => 'CustomerGuest'], function () {
+
+        // Route::get('/login',['as'=>'customer.login','uses'=>'\App\Http\ControllersD\AuthController@login']);
+        // Route::post('/attempt',['as'=>'customer.attempt','uses'=>'\App\Http\Controllers\AuthController@login_process']);
+        // Route::get('/forgotpassword',['as'=>'customer.forget_password','uses'=>'\App\Http\Controllers\AuthController@forgotPage']);
+        // Route::post('/forgotpassword_process',['as'=>'customer.forgotpassword_process','uses'=>'\App\Http\Controllers\AuthController@forgot']);
+        // Route::get('/reset-password',['as'=>'customer.password.reset','uses'=>'\App\Http\Controllers\AuthController@resetPage']);
+        // Route::post('/reset/attempt',['as'=>'customer.resetAttempt','uses'=>'\App\Http\Controllers\AuthController@resetpass']);
+        // Route::get('/register',['as'=>'customer.register','uses'=>'\App\Http\Controllers\AuthController@register']);
+        // Route::post('/register/process',['as'=>'customer.register.process','uses'=>'\App\Http\Controllers\AuthController@store']);
+    });
+
+    Route::group(['middleware' => "CustomerAuth"], function () {
+        // Route::get('/logout',['as'=>'customer.logout','uses'=>'\App\Http\Controllers\Customer\ProfileController@logout']);
+        // Route::get('/profile',['as'=>'customer.profile','uses'=>'\App\Http\Controllers\Customer\ProfileController@index']);
+        // Route::post('/update_profile',['as'=>'customer.update.profile','uses'=>'\App\Http\Controllers\Customer\ProfileController@update']);
+        // Route::post('/change_password',['as'=>'customer.change.password','uses'=>'\App\Http\Controllers\Customer\ProfileController@change_password']);
+        
+    });
+});
