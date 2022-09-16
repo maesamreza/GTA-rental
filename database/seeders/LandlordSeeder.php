@@ -18,8 +18,8 @@ class LandlordSeeder extends Seeder
     {
         $admin = new User;
         $admin->role_id = 2;
-        $admin->first_name = 'landlord';
-        $admin->last_name = 'landlord';
+        $admin->name = 'landlord';
+        //$admin->last_name = 'landlord';
         $admin->email = "landlord@gmail.com";
         $admin->password = Hash::make('12345678');
         $admin->is_active=1;

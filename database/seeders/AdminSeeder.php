@@ -18,8 +18,8 @@ class AdminSeeder extends Seeder
     {
         $admin = new User;
         $admin->role_id = 1;
-        $admin->first_name = 'Admin';
-        $admin->last_name = 'Admin';
+        $admin->name = 'Admin';
+        //$admin->last_name = 'Admin';
         $admin->email = "admin@gmail.com";
         $admin->password = Hash::make('12345678');
         $admin->is_active=1;

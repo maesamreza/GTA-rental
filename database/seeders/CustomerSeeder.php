@@ -18,8 +18,8 @@ class CustomerSeeder extends Seeder
     {
         $admin = new User;
         $admin->role_id = 3;
-        $admin->first_name = 'customer';
-        $admin->last_name = 'customer';
+        $admin->name = 'customer';
+        //$admin->last_name = 'customer';
         $admin->email = "customer@gmail.com";
         $admin->password = Hash::make('12345678');
         $admin->is_active=1;
