@@ -107,3 +107,7 @@ Route::prefix('customer')->namespace('Customer')->group(function () {
 
     });
 });
+
+// Route::view('admin/login','Admin.auth.login');
+// Route::view('admin/dashboard','Admin.pages.dashboard');
+// Route::view('admin/dashboard','Admin.pages.dashboard');
