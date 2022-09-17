@@ -5,7 +5,7 @@
             <div class="row">
                 <div class="offset-md-1 col-md-10">
                     <div class="card shadow">
-                        <div class="card-header">
+                        <div class="card-header d-flex justify-content-center">
                             <h2 class="text-black text-center">ADD PROPERTY</h2>
                         </div>
                         <div class="card-body">
@@ -13,7 +13,7 @@
                                 @csrf
                                 <div class="row">
                                     <div class="form-group col-md-12">
-                                        <label for="image-upload">Property Type</label>
+                                        <label for="Property Type">Property Type</label>
                                         <select class="form-select" aria-label="Default select example">
                                             <option disabled class="fs-4">All Apartment</option>
                                             <option value="1">Apartment</option>
@@ -23,43 +23,104 @@
                                             <option value="5">Duplex</option>
                                             <option value="6">Loft</option>
                                             <option disabled class="fs-4">All House</option>
-                                                <option value="7">House</option>
-                                                <option value="8">Town House</option>
-                                                <option value="9">Multi Unit</option>
-                                                <option value="10">cabin</option>
-                                                <option value="11">cottage</option>
-                                                <option disabled class="fs-4">All Bedroom</option>
+                                            <option value="7">House</option>
+                                            <option value="8">Town House</option>
+                                            <option value="9">Multi Unit</option>
+                                            <option value="10">cabin</option>
+                                            <option value="11">cottage</option>
+                                            <option disabled class="fs-4">All Bedroom</option>
                                             <option value="12">Private Bedroom</option>
                                             <option value="13">Share Bedroom</option>
-                                          </select>
-                                    </div>
-                                    <div class="form-group col-md-12">
-                                        <label for="image-upload">Property range form</label>
+                                        </select>
                                     </div>
                                     <div class="form-group col-md-6">
-                                        <div class="d-block">
-                                            <label for="password" class="control-label">Property Address</label>
-                                            <label for="password" class="control-label">Floor Plan Cloning</label>
-                                            <label for="password" class="control-label">price range start</label>
-                                            <label for="password" class="control-label">price range end</label>
-                                            <label for="password" class="control-label"></label>
-                                        </div>
-                                        <input id="password" type="password" class="form-control" name="password"
-                                            tabindex="2" required>
-                                        <div class="invalid-feedback">
+                                        <label for="Price range form">Price range from</label>
+                                        <input class="form-control" type="number" name="price from" tabindex="2"
+                                            required />
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="price range to">Price range to</label>
+                                        <input class="form-control" type="number" name="price to" tabindex="2"
+                                            required />
+                                    </div>
+                                    <div class="form-group col-md-2">
+                                        <label for="bathrrom">Bedrooms</label>
+                                        <input class="form-control" type="number" name="bed" tabindex="2" required />
+                                    </div>
+                                    <div class="form-group col-md-2">
+                                        <label for="bath">Bath</label>
+                                        <input class="form-control" type="number" name="bath" tabindex="2" required />
+                                    </div>
+                                    <div class="form-group col-md-3">
+                                        <label for="price">Price</label>
+                                        <input class="form-control" type="number" name="price" tabindex="2" required />
+                                    </div>
+                                    <div class="form-group col-md-3">
+                                        <label for="price">Avalaible</label>
+                                        <select class="form-select form-control" aria-label="Default select example">
+                                            <option value="1">Avalaible</option>
+                                            <option value="2">Not Avalaible</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-md-2">
+                                        <a class="btn btn-primary btn-block">Add</a>
+                                    </div>
+                                    <h4>About Property</h4>
+                                    <div class="form-group col-md-6">
+                                        <label for="parking-type">Parking Type</label>
+                                        <input class="form-control" type="text" name="Parking-Type" tabindex="2"
+                                            required />
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="Parking-Spot">Parking Spot</label>
+                                        <input class="form-control" type="text" name="Parking-Spot" tabindex="2"
+                                            required />
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="Lease-terms">Lease terms</label>
+                                        <input class="form-control" type="text" name="Lease-terms" tabindex="2"
+                                            required />
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="Shorts-terms">Shorts terms</label>
+                                        <input class="form-control" type="text" name="Shorts-terms" tabindex="2"
+                                            required />
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="Furnished">Furnished</label>
+                                        <input class="form-control" type="text" name="Furnished" tabindex="2"
+                                            required />
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="Year-Build">Year Build</label>
+                                        <input class="form-control" type="text" name="Year-Build" tabindex="2"
+                                            required />
+                                    </div>
+                                    <div class="form-group col-md-12">
+                                        <label for="desc">Description</label>
+                                        <textarea name="question" id="step1" style="height: 30vh " class="form-control"></textarea>
+                                    </div>
+                                    {{-- <h4>Building Features</h4> --}}
+                                    <div class="form-group col-md-12">
+                                        <label for="building">Building Features</label>
+                                        <textarea name="question" id="step2" style="height: 30vh " class="form-control"></textarea>
+                                    </div>
+                                    {{-- <h4>Unit Features</h4> --}}
+                                    
+                                    <div class="form-group col-md-12">
+                                        <label for="unit">Unit Features</label>
+                                        <textarea name="question" id="step3" style="height: 30vh " class="form-control"></textarea>
+                                    </div>
+                                    {{-- <h4>Nearby</h4> --}}
+                                    <div class="form-group col-md-12">
+                                        <label for="nearby">Nearby</label>
+                                        <textarea name="question" id="step4" style="height: 30vh " class="form-control"></textarea>
+                                    </div>
 
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="custom-control custom-checkbox">
-                                            <input type="checkbox" name="remember" class="custom-control-input"
-                                                tabindex="3" id="remember-me">
-                                            <label class="custom-control-label" for="remember-me">Remember Me</label>
-                                        </div>
-                                    </div>
-                                    <div action="/file-upload" class="dropzone" id="my-awesome-dropzone">
+                                    <div action="/file-upload" class="dropzone form-group" id="my-awesome-dropzone">
                                         <input type="" class="d-none" name="" />
                                     </div>
+
                                     <div class="form-group">
                                         <button type="submit" class="btn btn-success btn-lg btn-block" tabindex="4">
                                             Login
@@ -75,4 +136,26 @@
             </div>
         </section>
     </div>
+    {{-- <script> var editor = new FroalaEditor('#froala'); </script> --}}
 @endsection
+@section('script')
+    <script>
+        $(document).ready(function() {
+           
+            tinymce.init({
+                selector: '#step1'
+            });
+            tinymce.init({
+                selector: '#step2'
+            });
+            tinymce.init({
+                selector: '#step3'
+            });
+            tinymce.init({
+                selector: '#step4'
+            });
+        })
+    </script>
+@endsection
+{{-- @push('script')
+@endpush --}}

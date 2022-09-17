@@ -15,17 +15,20 @@
     <link href="{{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet">
 
     {{-- data table css files --}}
-    <link rel="stylesheet" href="{{asset('assets/bundles/datatables/datatables.min.css')}}">
-  <link rel="stylesheet" href="{{asset('assets/bundles/datatables/DataTables-1.10.16/css/dataTables.bootstrap4.min.css')}}">
+    <link rel="stylesheet" href="{{ asset('assets/bundles/datatables/datatables.min.css') }}">
+    <link rel="stylesheet"
+        href="{{ asset('assets/bundles/datatables/DataTables-1.10.16/css/dataTables.bootstrap4.min.css') }}">
     {{-- data table css files --}}
 
-    {{-- dropzone css  --}}
-<link rel="stylesheet" href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css" type="text/css" />
-    {{-- dropzone css  --}}
-        
+    {{-- dropzone css --}}
+    <link rel="stylesheet" href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css" type="text/css" />
+    {{-- dropzone css --}}
     <!-- Custom style CSS -->
     <link rel="stylesheet" href="{{ asset('assets/css/custom.css') }}">
     <link rel='shortcut icon' type='image/x-icon' href='assets/img/favicon.ico' />
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
+    {{-- <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script> --}}
 </head>
 
 <body>
@@ -57,19 +60,19 @@
     <script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
 
     {{-- data table js files --}}
-    <script src="{{asset('assets/bundles/datatables/datatables.min.js')}}"></script>
-    <script src="{{asset('assets/bundles/datatables/DataTables-1.10.16/js/dataTables.bootstrap4.min.js')}}"></script>
-    <script src="{{asset('assets/bundles/jquery-ui/jquery-ui.min.js')}}"></script>
+    <script src="{{ asset('assets/bundles/datatables/datatables.min.js') }}"></script>
+    <script src="{{ asset('assets/bundles/datatables/DataTables-1.10.16/js/dataTables.bootstrap4.min.js') }}"></script>
+    <script src="{{ asset('assets/bundles/jquery-ui/jquery-ui.min.js') }}"></script>
     <!-- Page Specific JS File -->
-    <script src="{{asset('assets/js/page/datatables.js')}}"></script>
+    <script src="{{ asset('assets/js/page/datatables.js') }}"></script>
     {{-- data table js files --}}
 
-    {{-- dropzne js  --}}
+    {{-- dropzne js --}}
     <script src="https://unpkg.com/dropzone@5/dist/min/dropzone.min.js"></script>
-    {{-- dropzne js  --}}
-    
-
-    
+    {{-- dropzne js --}}
+    {{-- <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script> --}}
+    <script src="//cdnjs.cloudflare.com/ajax/libs/tinymce/4.5.1/tinymce.min.js"></script> 
+@yield('script')
 </body>
 
 </html>
