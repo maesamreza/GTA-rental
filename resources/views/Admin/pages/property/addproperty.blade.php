@@ -43,6 +43,7 @@
                                         <input class="form-control" type="number" name="price to" tabindex="2"
                                             required />
                                     </div>
+                            <h4 class="text-black text-center">Floor Plans</h4>
                                     <div class="form-group col-md-2">
                                         <label for="bathrrom">Bedrooms</label>
                                         <input class="form-control" type="number" name="bed" tabindex="2" required />
@@ -65,7 +66,23 @@
                                     <div class="form-group col-md-2">
                                         <a class="btn btn-primary btn-block">Add</a>
                                     </div>
-                                    <h4>About Property</h4>
+                                    <h4 class="text-black text-center">About Property</h4>
+                                    <div class="form-group col-md-6">
+                                        <label for="parking-type">Propertty Type</label>
+                                        <select class="form-select form-control" aria-label="Default select example">
+                                            <option selected >Select one</option>
+                                            <option value="1">All Apartment</option>
+                                        <option value="2">All House</option>
+                                        <option value="2">All Bedroom</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="parking-type">Property SubType</label>
+                                        <select class="form-select form-control" aria-label="Default select example">
+                                            <option >All Apartment</option>
+                                        </select>
+                                    </div>
+                                   
                                     <div class="form-group col-md-6">
                                         <label for="parking-type">Parking Type</label>
                                         <input class="form-control" type="text" name="Parking-Type" tabindex="2"
@@ -100,7 +117,7 @@
                                         <label for="desc">Description</label>
                                         <textarea name="question" id="step1" style="height: 30vh " class="form-control"></textarea>
                                     </div>
-                                    {{-- <h4>Building Features</h4> --}}
+                                    <h4 class="text-black text-center">Features And Amenities</h4>
                                     <div class="form-group col-md-12">
                                         <label for="building">Building Features</label>
                                         <textarea name="question" id="step2" style="height: 30vh " class="form-control"></textarea>
