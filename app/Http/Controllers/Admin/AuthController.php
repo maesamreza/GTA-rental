@@ -12,8 +12,8 @@ use Illuminate\Support\Facades\{DB,Mail,Auth,Hash};
 class AuthController extends Controller
 {
     public function login(){
-        //return view('user.auth.login.login');
-     }
+        return view('Admin.Auth.login');
+    }
  
     public function login_process(Request $request){
          $controlls=$request->all();
@@ -32,9 +32,9 @@ class AuthController extends Controller
                  //$credientials=['email'=>$request->email,'password'=>$request->password];
                  if (Auth::guard('admin')->attempt(['email'=>$request->email,'password'=>$request->password,'role_id'=>1,'is_active'=>1])) {
                     // dd('admin');
-                     //return redirect()->route('user.dashboard');
+                     return redirect()->route('admin.dashboard');
                  }else{
-                    // return redirect()->route('user.login')->withErrors(['error'=>"Invalid Credientials"]);
+                    return redirect()->route('admin.login')->withErrors(['error'=>"Invalid Credientials"]);
                  }
              }
      }
