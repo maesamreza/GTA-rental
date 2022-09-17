@@ -18,6 +18,10 @@
     <link rel="stylesheet" href="{{asset('assets/bundles/datatables/datatables.min.css')}}">
   <link rel="stylesheet" href="{{asset('assets/bundles/datatables/DataTables-1.10.16/css/dataTables.bootstrap4.min.css')}}">
     {{-- data table css files --}}
+
+    {{-- dropzone css  --}}
+<link rel="stylesheet" href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css" type="text/css" />
+    {{-- dropzone css  --}}
         
     <!-- Custom style CSS -->
     <link rel="stylesheet" href="{{ asset('assets/css/custom.css') }}">
@@ -59,6 +63,10 @@
     <!-- Page Specific JS File -->
     <script src="{{asset('assets/js/page/datatables.js')}}"></script>
     {{-- data table js files --}}
+
+    {{-- dropzne js  --}}
+    <script src="https://unpkg.com/dropzone@5/dist/min/dropzone.min.js"></script>
+    {{-- dropzne js  --}}
     
 
     

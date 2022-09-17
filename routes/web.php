@@ -108,7 +108,5 @@ Route::prefix('customer')->namespace('Customer')->group(function () {
 
     });
 });
-
-// Route::view('admin/login','Admin.auth.login');
-// Route::view('admin/dashboard','Admin.pages.dashboard');
-// Route::view('admin/dashboard','Admin.pages.dashboard');
+Route::view('admin/property','Admin.pages.property.property');
+Route::view('admin/addproperty','Admin.pages.property.addproperty');
