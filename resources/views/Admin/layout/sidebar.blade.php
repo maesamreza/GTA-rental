@@ -4,21 +4,22 @@
 <div class="main-sidebar sidebar-style-2">
     <aside id="sidebar-wrapper">
         <div class="sidebar-brand">
-            <a href="index-2.html"> <img alt="image" src="{{ asset('assets/img/logo1.png') }}" class="header-logo" />
+            <a href="index-2.html"> <img alt="image" src="{{ asset('assets/img/login-logo.png') }}"
+                    class="header-logo" />
                 <span class="logo-name"></span>
             </a>
         </div>
-        <div class="sidebar-user">
+        <div class="sidebar-user my-3">
             <div class="sidebar-user-picture">
                 <img alt="image" src="{{ asset('assets/img/user.png') }}">
             </div>
             <div class="sidebar-user-details">
-                <div class="user-name">Admin</div>
+                <div class="user-name text-white">Admin</div>
 
             </div>
         </div>
         <ul class="sidebar-menu">
-            <li class="menu-header">Main</li>
+
             <li class="dropdown  ">
                 <a href="{{ route('admin.dashboard') }}" class=" nav-link"><i
                         data-feather="monitor"></i><span>Dashboard</span></a>

@@ -46,7 +46,7 @@
                                                     <div class="col-md-3">
                                                         <a href="/admin/editlandlord" class="btn btn-success rounded "
                                                             title="Add">
-                                                            <i class="fa fa-plus">
+                                                            <i class="fa fa-edit">
 
                                                             </i>
                                                         </a>
