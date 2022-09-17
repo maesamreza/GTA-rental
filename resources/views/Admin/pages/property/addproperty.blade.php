@@ -6,7 +6,7 @@
                 <div class="offset-md-1 col-md-10">
                     <div class="card shadow">
                         <div class="card-header d-flex justify-content-center">
-                            <h2 class="text-black text-center">ADD PROPERTY</h2>
+                            <h2 class="text-black text-center">Areturn DD PROPERTY</h2>
                         </div>
                         <div class="card-body">
                             <form>
@@ -43,46 +43,62 @@
                                         <input class="form-control" type="number" name="price to" tabindex="2"
                                             required />
                                     </div>
-                            <h4 class="text-black text-center">Floor Plans</h4>
-                                    <div class="form-group col-md-2">
-                                        <label for="bathrrom">Bedrooms</label>
-                                        <input class="form-control" type="number" name="bed" tabindex="2" required />
+                                    <h4 class="text-black text-center">Floor Plans</h4>
+
+                                    <div class="productdiv">
+                                        <div class="row">
+                                            <div class="form-group col-md-2">
+                                                <label for="bathrrom">Bedrooms</label>
+                                                <input class="form-control" type="number" name="bed" tabindex="2"
+                                                    required />
+                                            </div>
+                                            <div class="form-group col-md-2">
+                                                <label for="bath">Bath</label>
+                                                <input class="form-control" type="number" name="bath" tabindex="2"
+                                                    required />
+                                            </div>
+                                            <div class="form-group col-md-3">
+                                                <label for="price">Price</label>
+                                                <input class="form-control" type="number" name="price" tabindex="2"
+                                                    required />
+                                            </div>
+                                            <div class="form-group col-md-3">
+                                                <label for="price">Avalaible</label>
+                                                <select class="form-select form-control"
+                                                    aria-label="Default select example">
+                                                    <option value="1">Avalaible</option>
+                                                    <option value="2">Not Avalaible</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group col-md-2">
+                                                <a href="#" class="btn btn-success fa fa-plus plus" onclick="add()">
+                                                    <a href="#" class="btn btn-danger fa fa-minus plus"
+                                                        onclick="removeproduct()">
+                                                        <i class="fa fa-plus">
+                                                        </i></a>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="form-group col-md-2">
-                                        <label for="bath">Bath</label>
-                                        <input class="form-control" type="number" name="bath" tabindex="2" required />
-                                    </div>
-                                    <div class="form-group col-md-3">
-                                        <label for="price">Price</label>
-                                        <input class="form-control" type="number" name="price" tabindex="2" required />
-                                    </div>
-                                    <div class="form-group col-md-3">
-                                        <label for="price">Avalaible</label>
-                                        <select class="form-select form-control" aria-label="Default select example">
-                                            <option value="1">Avalaible</option>
-                                            <option value="2">Not Avalaible</option>
-                                        </select>
-                                    </div>
-                                    <div class="form-group col-md-2">
-                                        <a class="btn btn-primary btn-block">Add</a>
-                                    </div>
+                                    <div id="moreproduct"> </div>
+
+
                                     <h4 class="text-black text-center">About Property</h4>
                                     <div class="form-group col-md-6">
                                         <label for="parking-type">Propertty Type</label>
                                         <select class="form-select form-control" aria-label="Default select example">
-                                            <option selected >Select one</option>
+                                            <option selected>Select one</option>
                                             <option value="1">All Apartment</option>
-                                        <option value="2">All House</option>
-                                        <option value="2">All Bedroom</option>
+                                            <option value="2">All House</option>
+                                            <option value="2">All Bedroom</option>
                                         </select>
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label for="parking-type">Property SubType</label>
                                         <select class="form-select form-control" aria-label="Default select example">
-                                            <option >All Apartment</option>
+                                            <option>All Apartment</option>
                                         </select>
                                     </div>
-                                   
+
                                     <div class="form-group col-md-6">
                                         <label for="parking-type">Parking Type</label>
                                         <input class="form-control" type="text" name="Parking-Type" tabindex="2"
@@ -123,7 +139,7 @@
                                         <textarea name="question" id="step2" style="height: 30vh " class="form-control"></textarea>
                                     </div>
                                     {{-- <h4>Unit Features</h4> --}}
-                                    
+
                                     <div class="form-group col-md-12">
                                         <label for="unit">Unit Features</label>
                                         <textarea name="question" id="step3" style="height: 30vh " class="form-control"></textarea>
@@ -158,7 +174,7 @@
 @section('script')
     <script>
         $(document).ready(function() {
-           
+
             tinymce.init({
                 selector: '#step1'
             });
@@ -173,6 +189,32 @@
             });
         })
     </script>
+
+    <script>
+        let count = 0;
+
+        function add() {
+            count += 1;
+            var clone1 = $('.productdiv').clone().first();
+            // var title = clone1.find(".title");
+            // title.remove();
+            // var image = clone1.find(".image");
+            // image[0].name = 'image[' + count + '][]';
+
+            // console.log(image[0].name);        
+
+            clone1.find('.removebtn').on('click', function() {
+                $(this).parents('.productdiv').remove()
+            });
+            clone1.appendTo('#moreproduct');
+
+            // var category = clone1.find(".bootstrap-tagsinput").remove();
+            // $('.inputtags').tagsinput();
+        }
+
+        function removeproduct(th) {
+            console.log(this)
+            $(event.target).closest('.productdiv').remove();
+        }
+    </script>
 @endsection
-{{-- @push('script')
-@endpush --}}
