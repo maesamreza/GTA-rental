@@ -1,5 +1,5 @@
 <style>
- 
+
 </style>
 <div class="main-sidebar sidebar-style-2">
     <aside id="sidebar-wrapper">
@@ -19,17 +19,18 @@
         </div>
         <ul class="sidebar-menu">
             <li class="menu-header">Main</li>
-             <li class="dropdown  ">
-                <a href="{{route('admin.dashboard')}}" class=" nav-link"><i data-feather="monitor"></i><span>Dashboard</span></a>
+            <li class="dropdown  ">
+                <a href="{{ route('admin.dashboard') }}" class=" nav-link"><i
+                        data-feather="monitor"></i><span>Dashboard</span></a>
             </li>
             <li class="dropdown  ">
-                <a href="/admin/property" class=" nav-link"><i data-feather="monitor"></i><span>Property</span></a>
+                <a href="/admin/property" class=" nav-link"><i data-feather="home"></i><span>Property</span></a>
             </li>
             <li class="dropdown ">
-                <a href="#" class=" nav-link"><i data-feather="monitor"></i><span>LandLord</span></a>
+                <a href="/admin/landlord" class=" nav-link"><i data-feather="user"></i><span>LandLord</span></a>
             </li>
             <li class="dropdown ">
-                <a href="#" class="nav-link"><i data-feather="monitor"></i><span>User</span></a>
+                <a href="/admin/rental" class="nav-link"><i data-feather="users"></i><span>Rental </span></a>
             </li>
 
         </ul>
