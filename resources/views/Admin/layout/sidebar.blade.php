@@ -19,8 +19,11 @@
         </div>
         <ul class="sidebar-menu">
             <li class="menu-header">Main</li>
+             <li class="dropdown  ">
+                <a href="{{route('admin.dashboard')}}" class=" nav-link"><i data-feather="monitor"></i><span>Dashboard</span></a>
+            </li>
             <li class="dropdown  ">
-                <a href="{{url('/admin/property')}}" class=" nav-link"><i data-feather="monitor"></i><span>Property</span></a>
+                <a href="#" class=" nav-link"><i data-feather="monitor"></i><span>Property</span></a>
             </li>
             <li class="dropdown ">
                 <a href="#" class=" nav-link"><i data-feather="monitor"></i><span>LandLord</span></a>
