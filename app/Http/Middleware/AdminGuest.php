@@ -19,7 +19,7 @@ class AdminGuest
     {
         if(Auth::guard('admin')->check())
         {
-            //return redirect()->route('admin.dashboard');
+            return redirect()->route('admin.dashboard');
         }
         return $next($request);
     }
