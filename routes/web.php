@@ -19,25 +19,25 @@ Route::get('/', function () {
 
 
 Route::prefix('admin')->namespace('Admin')->group(function () {
-        Route::group(['middleware' => 'AdminGuest'], function () {
-    
-            // Route::get('/login',['as'=>'admin.login','uses'=>'\App\Http\Controllers\Admin\AuthController@login']);
-            // Route::post('/attempt',['as'=>'admin.attempt','uses'=>'\App\Http\Controllers\Admin\AuthController@login_process']);
-            // Route::get('/forgotpassword',['as'=>'admin.forget_password','uses'=>'\App\Http\Controllers\Admin\AuthController@forgotPage']);
-            // Route::post('/forgotpassword_process',['as'=>'admin.forgotpassword_process','uses'=>'\App\Http\Controllers\Admin\AuthController@forgot']);
-            // Route::get('/reset-password',['as'=>'admin.password.reset','uses'=>'\App\Http\Controllers\Admin\AuthController@resetPage']);
-            // Route::post('/reset/attempt',['as'=>'admin.resetAttempt','uses'=>'\App\Http\Controllers\Admin\AuthController@resetpass']);
-            // Route::get('/register',['as'=>'admin.register','uses'=>'\App\Http\Controllers\Admin\AuthController@register']);
-            // Route::post('/register/process',['as'=>'admin.register.process','uses'=>'\App\Http\Controllers\Admin\AuthController@store']);
-        });
-    
-        Route::group(['middleware' => "AdminAuth"], function () {
-            // Route::get('/logout',['as'=>'admin.logout','uses'=>'\App\Http\Controllers\Admin\AuthController@logout']);
-            // Route::get('/profile',['as'=>'admin.profile','uses'=>'\App\Http\Controllers\Admin\ProfileController@index']);
-            // Route::post('/update_profile',['as'=>'admin.update.profile','uses'=>'\App\Http\Controllers\Admin\ProfileController@update']);
-            // Route::post('/change_password',['as'=>'admin.change.password','uses'=>'\App\Http\Controllers\Admin\ProfileController@change_password']);
-            
-        });
+    Route::group(['middleware' => 'AdminGuest'], function () {
+
+        // Route::get('/login',['as'=>'admin.login','uses'=>'\App\Http\Controllers\Admin\AuthController@login']);
+        // Route::post('/attempt',['as'=>'admin.attempt','uses'=>'\App\Http\Controllers\Admin\AuthController@login_process']);
+        // Route::get('/forgotpassword',['as'=>'admin.forget_password','uses'=>'\App\Http\Controllers\Admin\AuthController@forgotPage']);
+        // Route::post('/forgotpassword_process',['as'=>'admin.forgotpassword_process','uses'=>'\App\Http\Controllers\Admin\AuthController@forgot']);
+        // Route::get('/reset-password',['as'=>'admin.password.reset','uses'=>'\App\Http\Controllers\Admin\AuthController@resetPage']);
+        // Route::post('/reset/attempt',['as'=>'admin.resetAttempt','uses'=>'\App\Http\Controllers\Admin\AuthController@resetpass']);
+        // Route::get('/register',['as'=>'admin.register','uses'=>'\App\Http\Controllers\Admin\AuthController@register']);
+        // Route::post('/register/process',['as'=>'admin.register.process','uses'=>'\App\Http\Controllers\Admin\AuthController@store']);
+    });
+
+    Route::group(['middleware' => "AdminAuth"], function () {
+        // Route::get('/logout',['as'=>'admin.logout','uses'=>'\App\Http\Controllers\Admin\AuthController@logout']);
+        // Route::get('/profile',['as'=>'admin.profile','uses'=>'\App\Http\Controllers\Admin\ProfileController@index']);
+        // Route::post('/update_profile',['as'=>'admin.update.profile','uses'=>'\App\Http\Controllers\Admin\ProfileController@update']);
+        // Route::post('/change_password',['as'=>'admin.change.password','uses'=>'\App\Http\Controllers\Admin\ProfileController@change_password']);
+
+    });
 });
 
 
@@ -59,7 +59,7 @@ Route::prefix('admin')->namespace('Admin')->group(function () {
         // Route::get('/profile',['as'=>'user.profile','uses'=>'\App\Http\Controllers\User\ProfileController@index']);
         // Route::post('/update_profile',['as'=>'user.update.profile','uses'=>'\App\Http\Controllers\User\ProfileController@update']);
         // Route::post('/change_password',['as'=>'user.change.password','uses'=>'\App\Http\Controllers\User\ProfileController@change_password']);
-        
+
     });
 });
 
@@ -81,7 +81,7 @@ Route::prefix('landlord')->namespace('Landlord')->group(function () {
         // Route::get('/profile',['as'=>'landlord.profile','uses'=>'\App\Http\Controllers\Landlord\ProfileController@index']);
         // Route::post('/update_profile',['as'=>'landlord.update.profile','uses'=>'\App\Http\Controllers\Landlord\ProfileController@update']);
         // Route::post('/change_password',['as'=>'landlord.change.password','uses'=>'\App\Http\Controllers\Landlord\ProfileController@change_password']);
-        
+
     });
 });
 
@@ -104,6 +104,6 @@ Route::prefix('customer')->namespace('Customer')->group(function () {
         // Route::get('/profile',['as'=>'customer.profile','uses'=>'\App\Http\Controllers\Customer\ProfileController@index']);
         // Route::post('/update_profile',['as'=>'customer.update.profile','uses'=>'\App\Http\Controllers\Customer\ProfileController@update']);
         // Route::post('/change_password',['as'=>'customer.change.password','uses'=>'\App\Http\Controllers\Customer\ProfileController@change_password']);
-        
+
     });
 });
