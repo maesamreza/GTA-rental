@@ -55,9 +55,9 @@ Route::prefix('admin')->namespace('Admin')->group(function () {
     });
 
     Route::group(['middleware' => "AdminAuth"], function () {
-         Route::get('/logout',['as'=>'admin.logout','uses'=>'\App\Http\Controllers\Admin\AuthController@logout']);
-        // Route::get('/profile',['as'=>'admin.profile','uses'=>'\App\Http\Controllers\Admin\ProfileController@index']);
-        // Route::post('/update_profile',['as'=>'admin.update.profile','uses'=>'\App\Http\Controllers\Admin\ProfileController@update']);
+        Route::get('/logout',['as'=>'admin.logout','uses'=>'\App\Http\Controllers\Admin\AuthController@logout']);
+        Route::get('/profile',['as'=>'admin.profile','uses'=>'\App\Http\Controllers\Admin\ProfileController@index']);
+        Route::post('/update_profile',['as'=>'admin.update.profile','uses'=>'\App\Http\Controllers\Admin\ProfileController@update']);
         // Route::post('/change_password',['as'=>'admin.change.password','uses'=>'\App\Http\Controllers\Admin\ProfileController@change_password']);
         Route::get('/dashboard',['as'=>'admin.dashboard','uses'=>'\App\Http\Controllers\Admin\DashboardController@index']);
         Route::get('/addlandlord',['as'=>'admin.addlandlord','uses'=>'\App\Http\Controllers\Admin\LandlordController@addView']);
@@ -130,4 +130,4 @@ Route::view('admin/editproperty','Admin.pages.property.edit');
 // Route::view('admin/addrental','Admin.pages.rental.addrental');
 // Route::view('admin/rental','Admin.pages.rental.rental');
 // Route::view('admin/editrental','Admin.pages.rental.editrental');
-Route::view('admin/profile','Admin.pages.profile');
+//Route::view('admin/profile','Admin.pages.profile');

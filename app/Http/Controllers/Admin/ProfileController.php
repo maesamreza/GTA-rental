@@ -14,7 +14,7 @@ class ProfileController extends Controller
     {
        $profile = User::where('id',auth('admin')->user()->id)->first();
 
-        //return view("admin.pages.profile.profile",compact('profile'));
+        return view("Admin.pages.profile",compact('profile'));
     }
 
     public function update(Request $request)
@@ -22,8 +22,8 @@ class ProfileController extends Controller
         $controlls = $request->all();
         $id = $request->id;
         $rules = array(
-            //"first_name" => "required|max:100",
-            "name" => "required|max:100",
+            "first_name" => "required|max:100",
+            "last_name" => "required|max:100",
             "phone_number" => "required|min:10|max:18",
             "email" => "required|email|unique:users,email,$id,id",
             "image"=>'nullable|image|mimes:jpeg,png,jpg|max:2048'
@@ -34,17 +34,17 @@ class ProfileController extends Controller
             return redirect()->back()->withErrors($validator)->withInput($controlls);
         }
        $update_profile = User::where('id',$request->id)->first();
-       $update_profile->name = $request->name;
-       //$update_profile->last_name = $request->last_name;
+       $update_profile->first_name = $request->first_name;
+       $update_profile->last_name = $request->last_name;
        $update_profile->phone_number = $request->phone_number;
        $update_profile->email = $request->email;
-       if($request->hasFile('image'))
-       {
-        $filename = $request->file('image')->getClientOriginalName ();
-
-        request()->profile_image->move(public_path('image'), $filename);
-        $update_profile->image = $filename;
-       }
+       if($request->hasFile('image')){
+            $file = $request->file('image');
+            $fileType = "image-";
+            $filename = $fileType.time()."-".rand().".".$file->getClientOriginalExtension();
+            $file->storeAs("/public/profile", $filename);
+            $update_profile->image = $filename;
+        }
        $update_profile->save();
 
        return redirect()->back()->with('success','Profile updated Successfully!');

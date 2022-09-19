@@ -22,7 +22,7 @@
                     class="d-sm-none d-lg-inline-block"></span></a>
             <div class="dropdown-menu dropdown-menu-right pullDown">
                 <div class="dropdown-title">{{Auth::guard('admin')->user()->first_name}}</div>
-                <a href="#" class="dropdown-item has-icon"> <i
+                <a href="{{route('admin.profile')}}" class="dropdown-item has-icon"> <i
                         class="far
                                     fa-user"></i> Profile
                 <div class="dropdown-divider"></div>
