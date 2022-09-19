@@ -1,12 +1,17 @@
 @extends('Admin.layout.master')
 @section('content')
+    <style>
+        .mt-32 {
+            margin-top: 32px
+        }
+    </style>
     <div class="main-content">
         <section class="section">
             <div class="row">
                 <div class="offset-md-1 col-md-10">
                     <div class="card shadow">
                         <div class="card-header d-flex justify-content-center">
-                            <h2 class="text-black text-center">Areturn DD PROPERTY</h2>
+                            <h2 class="text-black text-center">Add PROPERTY</h2>
                         </div>
                         <div class="card-body">
                             <form>
@@ -71,11 +76,24 @@
                                                 </select>
                                             </div>
                                             <div class="form-group col-md-2">
-                                                <a href="#" class="btn btn-success fa fa-plus plus" onclick="add()">
-                                                    <a href="#" class="btn btn-danger fa fa-minus plus"
-                                                        onclick="removeproduct()">
-                                                        <i class="fa fa-plus">
-                                                        </i></a>
+                                                <div class="row mt-32 ">
+                                                    <div class="col-md-6 ">
+                                                        <button type="button" class="btn  w-100 border text-success "
+                                                            title="Add" onclick="add()">
+                                                            <i data-feather="plus"></i>
+
+                                                        </button>
+                                                    </div>
+                                                    <div class="col-md-6 text-center ">
+                                                        <button type="button" title="remove"
+                                                            class="btn  text-danger border w-100 removebtn
+                                                            ">
+                                                            <i data-feather="minus"></i>
+                                                        </button>
+                                                    </div>
+                                                </div>
+
+
                                             </div>
                                         </div>
                                     </div>
@@ -196,25 +214,18 @@
         function add() {
             count += 1;
             var clone1 = $('.productdiv').clone().first();
-            // var title = clone1.find(".title");
-            // title.remove();
-            // var image = clone1.find(".image");
-            // image[0].name = 'image[' + count + '][]';
-
-            // console.log(image[0].name);        
 
             clone1.find('.removebtn').on('click', function() {
                 $(this).parents('.productdiv').remove()
             });
             clone1.appendTo('#moreproduct');
 
-            // var category = clone1.find(".bootstrap-tagsinput").remove();
-            // $('.inputtags').tagsinput();
+
         }
 
+
         function removeproduct(th) {
-            console.log(this)
-            $(event.target).closest('.productdiv').remove();
+            th.parentNode.parentNode.parentNode.parentNode.remove();
         }
     </script>
 @endsection
