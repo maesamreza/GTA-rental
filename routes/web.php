@@ -110,9 +110,11 @@ Route::prefix('customer')->namespace('Customer')->group(function () {
 });
 Route::view('admin/property','Admin.pages.property.property');
 Route::view('admin/addproperty','Admin.pages.property.addproperty');
+Route::view('admin/editproperty','Admin.pages.property.edit');
 Route::view('admin/landlord','Admin.pages.landlord.landlord');
 Route::view('admin/addlandlord','Admin.pages.landlord.addlandlord');
 Route::view('admin/editlandlord','Admin.pages.landlord.editlandlord');
 Route::view('admin/addrental','Admin.pages.rental.addrental');
 Route::view('admin/rental','Admin.pages.rental.rental');
 Route::view('admin/editrental','Admin.pages.rental.editrental');
+Route::view('admin/profile','Admin.pages.profile');

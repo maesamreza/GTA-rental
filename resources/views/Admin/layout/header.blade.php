@@ -15,7 +15,7 @@
                     class="d-sm-none d-lg-inline-block"></span></a>
             <div class="dropdown-menu dropdown-menu-right pullDown">
                 <div class="dropdown-title">Admin</div>
-                <a href="profile.html" class="dropdown-item has-icon"> <i
+                <a href="/admin/profile" class="dropdown-item has-icon"> <i
                         class="far
                                     fa-user"></i> Profile
                 <div class="dropdown-divider"></div>

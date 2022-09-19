@@ -11,7 +11,7 @@
                 <div class="offset-md-1 col-md-10">
                     <div class="card shadow">
                         <div class="card-header d-flex justify-content-center">
-                            <h2 class="text-black text-center">Add PROPERTY</h2>
+                            <h2 class="text-black text-center">Edit PROPERTY</h2>
                         </div>
                         <div class="card-body">
                             <form>
