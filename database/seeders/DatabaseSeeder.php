@@ -25,7 +25,8 @@ class DatabaseSeeder extends Seeder
             //AdminSuperSeeder::class,
             AdminSeeder::class,
             CustomerSeeder::class,
-            LandlordSeeder::class
+            LandlordSeeder::class,
+            PropertyTypeSeeder::class,
         ]);
     }
 }
