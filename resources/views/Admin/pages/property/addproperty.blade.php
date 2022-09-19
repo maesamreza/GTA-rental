@@ -156,22 +156,173 @@
                                         <label for="building">Building Features</label>
                                         <textarea name="question" id="step2" style="height: 30vh " class="form-control"></textarea>
                                     </div>
-                                    {{-- <h4>Unit Features</h4> --}}
 
-                                    <div class="form-group col-md-12">
+                                    <div class="form-group col-md-6">
+                                        <label for="unit">Comercial Building</label>
+
+                                        <select class="selectpicker form-control" multiple
+                                            aria-label="Default select example" data-live-search="true">
+                                            <option value="">Commercial Access Gate</option>
+                                            <option value="">Commercial Heating</option>
+                                            <option value="">Commercial Securtiy Guard</option>
+                                            <option value="">Commercial Air Conditoning</option>
+                                            <option value="">Commercial Locking Dock</option>
+                                        </select>
+
+                                    </div>
+
+                                    <div class="form-group col-md-6">
+                                        <label for="unit">Building Feature</label>
+                                        <select class="selectpicker form-control" multiple
+                                            aria-label="Default select example" data-live-search="true">
+                                            <option value="">24h Security</option>
+                                            <option>Bbq Area/Courtyard</option>
+                                            <option> Bike Racks</option>
+                                            <option>Bike Room </option>
+                                            <option> Buzzer Entry </option>
+                                            <option> Central Air Conditioning </option>
+                                            <option> Electric Vehicle Charger </option>
+                                            <option>Elevator </option>
+                                            <option>Exercise Room </option>
+                                            <option>Fitness Area </option>
+                                            <option> Garage </option>
+                                            <option> Guest Suite </option>
+                                            <option> Intercom </option>
+                                            <option> Jacuzzi </option>
+                                            <option> Laundry Facilities </option>
+                                            <option> Movie Room </option>
+                                            <option> On-Site Management </option>
+                                            <option> On-Site Staff </option>
+                                            <option> Parking - Underground </option>
+                                            <option> Parking - Visitor </option>
+                                            <option> Party Room </option>
+                                            <option> Pet Friendly </option>
+                                            <option> Pool - Heated </option>
+                                            <option> Pool - Rooftop </option>
+                                            <option> Professionally Managed </option>
+                                            <option> Recreation Room </option>
+                                            <option> Recycling </option>
+                                            <option> Resident Managers </option>
+                                            <option> Rooftop Deck </option>
+                                            <option> Rooftop Garden </option>
+                                            <option> Rooftop Lounge</option>
+                                            <option> Sauna </option>
+                                            <option> Secured Access </option>
+                                            <option> Security On-Site </option>
+                                            <option> Storage Lockers </option>
+                                            <option> Swimming Pool </option>
+                                            <option> Tennis Court </option>
+                                            <option> Theatre Room </option>
+                                            <option> Video Surveillance </option>
+
+
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group col-md-6">
                                         <label for="unit">Unit Features</label>
-                                        <textarea name="question" id="step3" style="height: 30vh " class="form-control"></textarea>
-                                    </div>
-                                    {{-- <h4>Nearby</h4> --}}
-                                    <div class="form-group col-md-12">
-                                        <label for="nearby">Nearby</label>
-                                        <textarea name="question" id="step4" style="height: 30vh " class="form-control"></textarea>
+
+                                        <select class="selectpicker form-control" multiple
+                                            aria-label="Default select example" data-live-search="true">
+                                            <option value=""> Air Conditioning </option>
+                                            <option value=""> Alarm System</option>
+                                            <option value=""> Backyard</option>
+                                            <option value=""> Balcony</option>
+                                            <option value=""> Bbq Grill</option>
+                                            <option value=""> Blinds</option>
+                                            <option value=""> Cable Ready</option>
+                                            <option value=""> Dishwasher</option>
+                                            <option value=""> Dryer</option>
+                                            <option value=""> Ensuite Laundry</option>
+                                            <option value=""> Fireplace </option>
+                                            <option value=""> Flooring - Carpeted </option>
+                                            <option value=""> Flooring - Ceramic</option>
+                                            <option value=""> Flooring - Hardwood</option>
+                                            <option value=""> Flooring - Laminate</option>
+                                            <option value=""> Flooring - Laminate Hardwood</option>
+                                            <option value=""> Flooring - Tile</option>
+                                            <option value=""> Flooring - Vinyl</option>
+                                            <option value=""> Flooring - Wood</option>
+                                            <option value=""> Freshly Painted</option>
+                                            <option value=""> Furnished</option>
+                                            <option value=""> Garburator</option>
+                                            <option value=""> Garden</option>
+                                            <option value=""> Gas Heating</option>
+                                            <option value=""> Granite Countertops</option>
+                                            <option value=""> Hot Tub</option>
+                                            <option value=""> Individual Thermostats</option>
+                                            <option value=""> Island</option>
+                                            <option value=""> Microwave</option>
+                                            <option value=""> New Appliances</option>
+                                            <option value=""> Newly Renovated</option>
+                                            <option value=""> Parking</option>
+                                            <option value=""> Patio</option>
+                                            <option value=""> Pool - Private</option>
+                                            <option value=""> Private Entry</option>
+                                            <option value=""> Private Yard</option>
+                                            <option value=""> Radiant Heat</option>
+                                            <option value=""> Security Cameras</option>
+                                            <option value=""> Shared Yard</option>
+                                            <option value=""> Storage</option>
+                                            <option value=""> Terrace</option>
+                                            <option value=""> Walk-In Closet</option>
+                                            <option value=""> Washer</option>
+                                            <option value=""> Wheelchair Access</option>
+                                            <option value=""> Window Coverings</option>
+                                        </select>
                                     </div>
 
-                                    <div action="/file-upload" class="dropzone form-group" id="my-awesome-dropzone">
-                                        <input type="" class="d-none" name="" />
-                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="unit">Nearby</label>
 
+                                        <select class="selectpicker form-control" multiple
+                                            aria-label="Default select example" data-live-search="true">
+                                            <option value=""> 24h Emergency</option>
+                                            <option value=""> Atm</option>
+                                            <option value=""> Bank</option>
+                                            <option value=""> Bars</option>
+                                            <option value=""> Bike Trails</option>
+                                            <option value=""> Bus Stop</option>
+                                            <option value=""> Cafe</option>
+                                            <option value=""> Convenience Store</option>
+                                            <option value=""> Daycare</option>
+                                            <option value=""> Dog Park</option>
+                                            <option value=""> Gas Station</option>
+                                            <option value=""> Grocery Store</option>
+                                            <option value=""> Gym</option>
+                                            <option value=""> Highway</option>
+                                            <option value=""> Hospital</option>
+                                            <option value=""> Movie Theater</option>
+                                            <option value=""> Parks</option>
+                                            <option value=""> Playground</option>
+                                            <option value=""> Pool</option>
+                                            <option value=""> Public Library</option>
+                                            <option value=""> Public Transit</option>
+                                            <option value=""> Recreation</option>
+                                            <option value=""> Restaurants</option>
+                                            <option value=""> Running Path</option>
+                                            <option value=""> School</option>
+                                            <option value=""> Schools</option>
+                                            <option value=""> Shopping</option>
+                                            <option value=""> Shopping Centre</option>
+                                        </select>
+
+                                    </div>
+                                    {{-- Date and time --}}
+                                    <div class="row">
+                                        <div class="form-group col-md-4">
+                                            <label for="">Date</label>
+                                            <input type="date" class="form-control" name="" id="">
+                                        </div>
+                                        <div class="form-group col-md-4">
+                                            <label for="">Start Time</label>
+                                            <input type="time" class="form-control" name="" id="">
+                                        </div>
+                                        <div class="form-group col-md-4">
+                                            <label for="">End Time</label>
+                                            <input type="time" class="form-control" name="" id="">
+                                        </div>
+                                    </div>
                                     <div class="form-group">
                                         <button type="submit" class="btn btn-success btn-lg btn-block" tabindex="4">
                                             Login
@@ -190,7 +341,7 @@
     {{-- <script> var editor = new FroalaEditor('#froala'); </script> --}}
 @endsection
 @section('script')
-    <script>
+    {{-- <script>
         $(document).ready(function() {
 
             tinymce.init({
@@ -206,7 +357,7 @@
                 selector: '#step4'
             });
         })
-    </script>
+    </script> --}}
 
     <script>
         let count = 0;
