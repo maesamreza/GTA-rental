@@ -43,8 +43,8 @@
                                             </td>
                                             <td>
                                                 <div class="row">
-                                                    <div class="col-md-3">
-                                                        <a href="/admin/editlandlord" class="btn btn-success rounded "
+                                                    <div class="col-md-6">
+                                                        <a href="/admin/editlandlord" class="btn btn-success w-100  "
                                                             title="Add">
                                                             <i class="fa fa-edit">
 
@@ -52,8 +52,8 @@
                                                         </a>
                                                     </div>
 
-                                                    <div class="col-md-1">
-                                                        <a href="#" class="btn btn-danger rounded " title="Add">
+                                                    <div class="col-md-6">
+                                                        <a href="#" class="btn btn-danger w-100 " title="Add">
                                                             <i class="fa fa-trash">
 
                                                             </i>
