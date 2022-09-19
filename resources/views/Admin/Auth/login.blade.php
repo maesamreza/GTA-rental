@@ -34,9 +34,15 @@
     }
 
     .bg-login {
-        background: url('{{ asset('assets/img/background-img.svg') }}') no-repeat 50%, 50%;
+        background: url('{{ asset('assets/img/background-img.svg') }}') no-repeat 50%,50%;
         background-size: cover;
+        padding: 58px;
     }
+
+    /* img {
+        width: 100%;
+        -webkit-box-reflect: below 0 linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 1));
+    } */
 </style>
 
 <body class="bg-login">
