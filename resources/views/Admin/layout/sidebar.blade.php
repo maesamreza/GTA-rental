@@ -11,10 +11,14 @@
         </div>
         <div class="sidebar-user my-3">
             <div class="sidebar-user-picture">
-                <img alt="image" src="{{ asset('assets/img/user.png') }}">
+                @if(!empty(Auth::guard('admin')->user()->image))
+                    <img alt="image" src="{{ asset('assets/img/user.png') }}">
+                @else
+                    <img alt="image" src="{{ asset('assets/img/user.png') }}">
+                @endif
             </div>
             <div class="sidebar-user-details">
-                <div class="user-name text-white">Admin</div>
+                <div class="user-name text-white">{{Auth::guard('admin')->user()->first_name}}</div>
 
             </div>
         </div>
@@ -28,10 +32,10 @@
                 <a href="/admin/property" class=" nav-link"><i data-feather="home"></i><span>Property</span></a>
             </li>
             <li class="dropdown ">
-                <a href="/admin/landlord" class=" nav-link"><i data-feather="user"></i><span>LandLord</span></a>
+                <a href="{{route('admin.landlord')}}" class=" nav-link"><i data-feather="user"></i><span>LandLord</span></a>
             </li>
             <li class="dropdown ">
-                <a href="/admin/rental" class="nav-link"><i data-feather="users"></i><span>Rental </span></a>
+                <a href="{{route('admin.rental')}}" class="nav-link"><i data-feather="users"></i><span>Rental </span></a>
             </li>
 
         </ul>
