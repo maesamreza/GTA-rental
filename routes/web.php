@@ -60,6 +60,19 @@ Route::prefix('admin')->namespace('Admin')->group(function () {
         // Route::post('/update_profile',['as'=>'admin.update.profile','uses'=>'\App\Http\Controllers\Admin\ProfileController@update']);
         // Route::post('/change_password',['as'=>'admin.change.password','uses'=>'\App\Http\Controllers\Admin\ProfileController@change_password']);
         Route::get('/dashboard',['as'=>'admin.dashboard','uses'=>'\App\Http\Controllers\Admin\DashboardController@index']);
+        Route::get('/addlandlord',['as'=>'admin.addlandlord','uses'=>'\App\Http\Controllers\Admin\LandlordController@addView']);
+        Route::post('/addlandlordprocess',['as'=>'admin.addlandlordprocess','uses'=>'\App\Http\Controllers\Admin\LandlordController@store']);
+        Route::get('/landlord',['as'=>'admin.landlord','uses'=>'\App\Http\Controllers\Admin\LandlordController@index']);
+        Route::get('/editlandlord/{id}',['as'=>'admin.editlandlord','uses'=>'\App\Http\Controllers\Admin\LandlordController@edit']);
+        Route::post('/editlandlordprocess',['as'=>'admin.editlandlordprocess','uses'=>'\App\Http\Controllers\Admin\LandlordController@update']);
+        Route::get('/deletelandlord/{id}',['as'=>'admin.deletelandlord','uses'=>'\App\Http\Controllers\Admin\LandlordController@delete']);
+
+        Route::get('/addrental',['as'=>'admin.addrental','uses'=>'\App\Http\Controllers\Admin\CustomerController@addView']);
+        Route::post('/addrentalprocess',['as'=>'admin.addrentalprocess','uses'=>'\App\Http\Controllers\Admin\CustomerController@store']);
+        Route::get('/rental',['as'=>'admin.rental','uses'=>'\App\Http\Controllers\Admin\CustomerController@index']);
+        Route::get('/editrental/{id}',['as'=>'admin.editrental','uses'=>'\App\Http\Controllers\Admin\CustomerController@edit']);
+        Route::post('/editrentalprocess',['as'=>'admin.editrentalprocess','uses'=>'\App\Http\Controllers\Admin\CustomerController@update']);
+        Route::get('/deleterental/{id}',['as'=>'admin.deleterental','uses'=>'\App\Http\Controllers\Admin\CustomerController@delete']);
 
     });
 });
@@ -110,9 +123,9 @@ Route::prefix('customer')->namespace('Customer')->group(function () {
 });
 Route::view('admin/property','Admin.pages.property.property');
 Route::view('admin/addproperty','Admin.pages.property.addproperty');
-Route::view('admin/landlord','Admin.pages.landlord.landlord');
-Route::view('admin/addlandlord','Admin.pages.landlord.addlandlord');
-Route::view('admin/editlandlord','Admin.pages.landlord.editlandlord');
-Route::view('admin/addrental','Admin.pages.rental.addrental');
-Route::view('admin/rental','Admin.pages.rental.rental');
-Route::view('admin/editrental','Admin.pages.rental.editrental');
+//Route::view('admin/landlord','Admin.pages.landlord.landlord');
+//Route::view('admin/addlandlord','Admin.pages.landlord.addlandlord');
+//Route::view('admin/editlandlord','Admin.pages.landlord.editlandlord');
+// Route::view('admin/addrental','Admin.pages.rental.addrental');
+// Route::view('admin/rental','Admin.pages.rental.rental');
+// Route::view('admin/editrental','Admin.pages.rental.editrental');
