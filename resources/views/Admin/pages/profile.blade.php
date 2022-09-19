@@ -19,7 +19,7 @@
                                 @csrf
                                 <div class="row">
                                     <div class="offset-md-3 col-md-6">
-                                        <img src="{{asset('assets\img\user.png')}}" class="w-50"/>
+                                        <img src="{{asset('assets\img\user.png')}}" class="w-100 border-50"/>
                                     </div>
                                 </div>
                                <input type="file" class="mt-4"/>

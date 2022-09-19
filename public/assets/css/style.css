@@ -10453,6 +10453,9 @@ body:not(.sidebar-mini)
   .slider.round:before {
     border-radius: 50%;
   }
+  .border-50{
+    border-radius: 50%;
+  }
   /* switch button css */
 
 /* our css  end*/
