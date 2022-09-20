@@ -13,7 +13,7 @@
                 class="nav-link dropdown-toggle nav-link-lg nav-link-user"> 
                 @if(!empty(Auth::guard('admin')->user()->image))
                     <img alt="image"
-                    src="{{ asset('assets/img/user.png') }}" class="user-img-radious-style">
+                    src="{{ asset('storage/profile/' .Auth::guard('admin')->user()->image) }}" class="user-img-radious-style">
                 @else
                     <img alt="image"
                     src="{{ asset('assets/img/user.png') }}" class="user-img-radious-style"> 

@@ -12,7 +12,7 @@
         <div class="sidebar-user my-3">
             <div class="sidebar-user-picture">
                 @if(!empty(Auth::guard('admin')->user()->image))
-                    <img alt="image" src="{{ asset('assets/img/user.png') }}">
+                    <img alt="image" src="{{ asset('storage/profile/' .Auth::guard('admin')->user()->image) }}">
                 @else
                     <img alt="image" src="{{ asset('assets/img/user.png') }}">
                 @endif

@@ -21,7 +21,7 @@
                                 <div class="row">
                                     @if(!empty($profile->image))
                                         <div class="offset-md-3 col-md-6">
-                                            <img src="{{asset('assets\img\user.png')}}" class="w-100 border-50"/>
+                                            {{-- <img src="{{asset('assets\img\user.png')}}" class="w-100 border-50"/> --}}
                                             <img id="frame"
                                                 src="{{ asset('storage/profile/' . $profile->image) }}"
                                                 class="w-100 border-50" />
