@@ -6008,6 +6008,8 @@ body.layout-3 .main-footer {
 .main-footer {
     padding: 20px 30px 20px 280px;
     margin-top: 47px;
+    position: fixed;
+    bottom: 0;
     color: #98a6ad;
     border-top: 1px solid #e3eaef;
     display: inline-block;

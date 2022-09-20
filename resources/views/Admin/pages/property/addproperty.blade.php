@@ -88,7 +88,7 @@
                                             </div>
                                             <div class="form-group col-md-2">
                                                 <label for="price">Unit Size</label>
-                                             <input type="text" class="form-control" name="" id="">
+                                                <input type="text" class="form-control" name="" id="">
                                             </div>
                                             <div class="form-group col-md-2">
                                                 <div class="row mt-32 ">
