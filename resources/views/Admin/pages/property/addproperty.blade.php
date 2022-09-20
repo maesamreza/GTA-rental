@@ -76,18 +76,19 @@
                                                 <input class="form-control" type="number" name="bath" tabindex="2"
                                                     required />
                                             </div>
-                                            <div class="form-group col-md-3">
+                                            <div class="form-group col-md-2">
                                                 <label for="price"><i class="fas fa-money-bill-wave"></i> Price</label>
                                                 <input class="form-control" type="number" name="price" tabindex="2"
                                                     required />
                                             </div>
-                                            <div class="form-group col-md-3">
-                                                <label for="price">Avalaible</label>
-                                                <select class="form-select form-control"
-                                                    aria-label="Default select example">
-                                                    <option value="1">Avalaible</option>
-                                                    <option value="2">Not Avalaible</option>
-                                                </select>
+                                            <div class="form-group col-md-2">
+                                                <label for="price"><i class="fas fa-calendar"></i> Available Date</label>
+                                                <input class="form-control" type="date" name="price" tabindex="2"
+                                                    required />
+                                            </div>
+                                            <div class="form-group col-md-2">
+                                                <label for="price">Unit Size</label>
+                                             <input type="text" class="form-control" name="" id="">
                                             </div>
                                             <div class="form-group col-md-2">
                                                 <div class="row mt-32 ">
