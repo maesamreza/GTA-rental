@@ -4,6 +4,10 @@
         .mt-32 {
             margin-top: 32px
         }
+
+        .material-icons {
+            font-size: 14px !important;
+        }
     </style>
     <div class="main-content">
         <section class="section">
@@ -11,14 +15,14 @@
                 <div class="offset-md-1 col-md-10">
                     <div class="card shadow">
                         <div class="card-header d-flex justify-content-center">
-                            <h2 class="text-black text-center">Add PROPERTY</h2>
+                            <h2 class="text-success my-3  text-center"> Add PROPERTY</h2>
                         </div>
                         <div class="card-body">
                             <form>
                                 @csrf
                                 <div class="row">
                                     <div class="form-group col-md-12">
-                                        <label for="Property Type">Property Type</label>
+                                        <label for="Property Type"><i class="fas fa-home"></i> Property Type</label>
                                         <select class="form-select" aria-label="Default select example">
                                             <option disabled class="fs-4">All Apartment</option>
                                             <option value="1">Apartment</option>
@@ -39,31 +43,41 @@
                                         </select>
                                     </div>
                                     <div class="form-group col-md-6">
-                                        <label for="Price range form">Price range from</label>
+                                        <label for="Price range form"><i
+                                                class="
+                                            fas fa-money-bill-wave"></i>
+                                            Price range To</label>
                                         <input class="form-control" type="number" name="price from" tabindex="2"
                                             required />
                                     </div>
                                     <div class="form-group col-md-6">
-                                        <label for="price range to">Price range to</label>
+                                        <label for="price range to"><i class="fas fa-money-bill-wave"></i>Price
+                                            range From</label>
                                         <input class="form-control" type="number" name="price to" tabindex="2"
                                             required />
                                     </div>
-                                    <h4 class="text-black text-center">Floor Plans</h4>
+                                    <h4 class="text-success my-3  text-center">Floor Plans</h4>
 
                                     <div class="productdiv">
                                         <div class="row">
                                             <div class="form-group col-md-2">
-                                                <label for="bathrrom">Bedrooms</label>
+                                                <label for="bathrrom"><i
+                                                        class="
+                                                    fas fa-bed"></i>
+                                                    Bedrooms</label>
                                                 <input class="form-control" type="number" name="bed" tabindex="2"
                                                     required />
                                             </div>
                                             <div class="form-group col-md-2">
-                                                <label for="bath">Bath</label>
+                                                <label for="bath"><i
+                                                        class="
+                                                    fas fa-bath"></i>
+                                                    Bath</label>
                                                 <input class="form-control" type="number" name="bath" tabindex="2"
                                                     required />
                                             </div>
                                             <div class="form-group col-md-3">
-                                                <label for="price">Price</label>
+                                                <label for="price"><i class="fas fa-money-bill-wave"></i> Price</label>
                                                 <input class="form-control" type="number" name="price" tabindex="2"
                                                     required />
                                             </div>
@@ -78,7 +92,7 @@
                                             <div class="form-group col-md-2">
                                                 <div class="row mt-32 ">
                                                     <div class="col-md-6 ">
-                                                        <button type="button" class="btn  w-100 border text-success "
+                                                        <button type="button" class="btn  w-100 border text-success  "
                                                             title="Add" onclick="add()">
                                                             <i data-feather="plus"></i>
 
@@ -92,17 +106,18 @@
                                                         </button>
                                                     </div>
                                                 </div>
-
-
                                             </div>
                                         </div>
                                     </div>
                                     <div id="moreproduct"> </div>
 
 
-                                    <h4 class="text-black text-center">About Property</h4>
+                                    <h4 class="text-success my-3  text-center">About Property</h4>
                                     <div class="form-group col-md-6">
-                                        <label for="parking-type">Propertty Type</label>
+                                        <label for="parking-type"><i
+                                                class="
+                                            fas fa-warehouse"></i>
+                                            Property Type</label>
                                         <select class="form-select form-control" aria-label="Default select example">
                                             <option selected>Select one</option>
                                             <option value="1">All Apartment</option>
@@ -111,54 +126,149 @@
                                         </select>
                                     </div>
                                     <div class="form-group col-md-6">
-                                        <label for="parking-type">Property SubType</label>
+                                        <label for="parking-type"><i
+                                                class="
+                                        fas fa-warehouse"></i>
+                                            Property
+                                            SubType</label>
                                         <select class="form-select form-control" aria-label="Default select example">
                                             <option>All Apartment</option>
                                         </select>
                                     </div>
 
                                     <div class="form-group col-md-6">
-                                        <label for="parking-type">Parking Type</label>
+                                        <label for="parking-type"><i
+                                                class="
+                                            fas fa-parking"></i>
+                                            Parking Type</label>
                                         <input class="form-control" type="text" name="Parking-Type" tabindex="2"
                                             required />
                                     </div>
                                     <div class="form-group col-md-6">
-                                        <label for="Parking-Spot">Parking Spot</label>
+                                        <label for="Parking-Spot"><i
+                                                class="
+                                            fas fa-parking"></i>
+                                            Parking Spot</label>
                                         <input class="form-control" type="text" name="Parking-Spot" tabindex="2"
                                             required />
                                     </div>
                                     <div class="form-group col-md-6">
-                                        <label for="Lease-terms">Lease terms</label>
+                                        <label for="Lease-terms"><i
+                                                class="
+                                            fas fa-newspaper"></i>
+                                            Lease terms</label>
                                         <input class="form-control" type="text" name="Lease-terms" tabindex="2"
                                             required />
                                     </div>
-                                    <div class="form-group col-md-6">
-                                        <label for="Shorts-terms">Shorts terms</label>
+                                    {{-- <div class="form-group col-md-6">
+                                        <label for="Shorts-terms"><i
+                                                class="
+                                            fas fa-file-contract"></i>
+                                            Shorts terms</label>
                                         <input class="form-control" type="text" name="Shorts-terms" tabindex="2"
                                             required />
-                                    </div>
-                                    <div class="form-group col-md-6">
-                                        <label for="Furnished">Furnished</label>
+                                    </div> --}}
+                                    {{-- <div class="form-group col-md-6">
+                                        <label for="Furnished"><i class="fas fa-hotel"></i> Furnished</label>
                                         <input class="form-control" type="text" name="Furnished" tabindex="2"
                                             required />
-                                    </div>
-                                    <div class="form-group col-md-6">
-                                        <label for="Year-Build">Year Build</label>
+                                    </div> --}}
+                                    {{-- <div class="form-group col-md-6">
+                                        <label for="Year-Build"><i
+                                                class="
+                                            fas fa-calendar-alt"></i>
+                                            Year Build</label>
                                         <input class="form-control" type="text" name="Year-Build" tabindex="2"
                                             required />
-                                    </div>
+                                    </div> --}}
                                     <div class="form-group col-md-12">
-                                        <label for="desc">Description</label>
-                                        <textarea name="question" id="step1" style="height: 30vh " class="form-control"></textarea>
+                                        <label for="desc"><i
+                                                class="
+                                            fas fa-sticky-note"></i>
+                                            Description</label>
+                                        <textarea name="question" id="step1" style="height: 10vh " class="form-control"></textarea>
                                     </div>
                                     <h4 class="text-success text-center">Features And Amenities</h4>
-                                    <div class="form-group col-md-12">
-                                        <label for="building">Building Features</label>
-                                        <textarea name="question" id="step2" style="height: 30vh " class="form-control"></textarea>
+                                    {{-- Year --}}
+                                    <div class="form-group col-md-3">
+                                        <label for="unit"><i class="fas fa-calendar"></i> Year</label>
+                                        <input type="month" class="form-control" placeholder="MMMM/YY" name=""
+                                            id="">
                                     </div>
+                                    {{-- Pet Firendly --}}
+                                    <div class="form-group col-md-3">
+                                        <label for="unit">
+                                            <i class="material-icons">pets</i> Pet Firendly</label>
+                                        <select class="form-control form-select">
+                                            <option>Yes</option>
+                                            <option>No</option>
+                                        </select>
+                                    </div>
+                                    {{-- Furnished? --}}
+                                    <div class="form-group col-md-3">
+                                        <label for="unit"><i class="fas fa-hotel"></i> Furnished?</label>
+                                        <select class="form-control form-select">
+                                            <option>Yes</option>
+                                            <option>No</option>
+                                        </select>
+                                    </div>
+                                    {{-- Short Term? --}}
+                                    <div class="form-group col-md-3">
+                                        <label for="unit"><i
+                                                class="
+                                        fas fa-file-contract"></i>
+                                            Short Term?</label>
+                                        <select class="form-control form-select">
+                                            <option>Yes</option>
+                                            <option>No</option>
+                                        </select>
+                                    </div>
+                                    {{-- Date and time --}}
+                                    <div class="producttime">
+                                        <div class="row">
+                                            <div class="form-group col-md-3">
+                                                <label for=""><i class="fas fa-calendar"></i> Date</label>
+                                                <input type="date" class="form-control" name=""
+                                                    id="">
+                                            </div>
+                                            <div class="form-group col-md-3">
+                                                <label for=""><i class="fas fa-clock"></i> Start Time</label>
+                                                <input type="time" class="form-control" name=""
+                                                    id="">
+                                            </div>
+                                            <div class="form-group col-md-3">
+                                                <label for=""><i class="fas fa-clock"></i> End Time</label>
+                                                <input type="time" class="form-control" name=""
+                                                    id="">
+                                            </div>
 
+                                            <div class="form-group col-md-2">
+                                                <div class="row mt-32 ">
+                                                    <div class="col-md-6 ">
+                                                        <button type="button" class="btn  w-100 border text-success "
+                                                            title="Add" onclick="addtime()">
+                                                            <i data-feather="plus"></i>
+
+                                                        </button>
+                                                    </div>
+                                                    <div class="col-md-6 text-center ">
+                                                        <button type="button" title="remove"
+                                                            class="btn  text-danger border w-100 removetime
+                        ">
+                                                            <i data-feather="minus"></i>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div id="moretime"></div>
+                                    {{-- Comercial Building --}}
                                     <div class="form-group col-md-6">
-                                        <label for="unit">Comercial Building</label>
+                                        <label for="unit"><i
+                                                class="
+                                            far fa-building"></i>
+                                            Comercial Building</label>
 
                                         <select class="selectpicker form-control" multiple
                                             aria-label="Default select example" data-live-search="true">
@@ -172,7 +282,10 @@
                                     </div>
 
                                     <div class="form-group col-md-6">
-                                        <label for="unit">Building Feature</label>
+                                        <label for="unit"><i
+                                                class="
+                                            fas fa-building"></i>
+                                            Building Feature</label>
                                         <select class="selectpicker form-control" multiple
                                             aria-label="Default select example" data-live-search="true">
                                             <option value="">24h Security</option>
@@ -220,7 +333,8 @@
                                     </div>
 
                                     <div class="form-group col-md-6">
-                                        <label for="unit">Unit Features</label>
+                                        <label for="unit">
+                                            <i class="material-icons">format_list_numbered</i> Unit Features</label>
 
                                         <select class="selectpicker form-control" multiple
                                             aria-label="Default select example" data-live-search="true">
@@ -273,7 +387,10 @@
                                     </div>
 
                                     <div class="form-group col-md-6">
-                                        <label for="unit">Nearby</label>
+                                        <label for="unit"><i
+                                                class="
+                                            fas fa-map-marked"></i>
+                                            Nearby</label>
 
                                         <select class="selectpicker form-control" multiple
                                             aria-label="Default select example" data-live-search="true">
@@ -308,25 +425,51 @@
                                         </select>
 
                                     </div>
-                                    {{-- Date and time --}}
-                                    <div class="row">
-                                        <div class="form-group col-md-4">
-                                            <label for="">Date</label>
-                                            <input type="date" class="form-control" name="" id="">
-                                        </div>
-                                        <div class="form-group col-md-4">
-                                            <label for="">Start Time</label>
-                                            <input type="time" class="form-control" name="" id="">
-                                        </div>
-                                        <div class="form-group col-md-4">
-                                            <label for="">End Time</label>
-                                            <input type="time" class="form-control" name="" id="">
-                                        </div>
+                                    {{-- Utilites --}}
+                                    <div class="form-group col-md-6">
+                                        <label for="unit"><i
+                                                class="
+                                            fas fa-plug"></i>
+                                            Utilies Included</label>
+
+                                        <select class="selectpicker form-control" multiple
+                                            aria-label="Default select example" data-live-search="true">
+                                            <option value="">Cable</option>
+                                            <option value="">Heating</option>
+                                            <option value="">Hydro/Electricity</option>
+                                            <option value="">Wifi/Internet</option>
+                                            <option value="">Saltelite TV</option>
+                                            <option value="">Water</option>
+                                        </select>
                                     </div>
-                                    <div class="form-group">
-                                        <button type="submit" class="btn btn-success btn-lg btn-block" tabindex="4">
-                                            Login
-                                        </button>
+                                    {{-- Categories --}}
+                                    <div class="form-group col-md-6">
+                                        <label for="unit">
+                                            <i class="material-icons">more_horiz</i> Categories</label>
+
+                                        <select class="selectpicker form-control" multiple
+                                            aria-label="Default select example" data-live-search="true">
+                                            <option value="">Coporate Housing</option>
+                                            <option value="">Student Housing</option>
+                                            <option value="">Senior Housing</option>
+                                            <option value="">Co-op Housing</option>
+                                            <option value="">Sublet</option>
+                                            <option value="">Vacation</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="offset-md-4 col-md-4 offset-md-4">
+                                            <div class="form-group">
+                                                <button type="submit" class="btn btn-success btn-lg btn-block mt-5 pt-3"
+                                                    tabindex="4">
+                                                    <h6>
+                                                        Add
+                                                    </h6>
+                                                </button>
+                                            </div>
+
+                                        </div>
                                     </div>
                                 </div>
                             </form>
@@ -341,7 +484,7 @@
     {{-- <script> var editor = new FroalaEditor('#froala'); </script> --}}
 @endsection
 @section('script')
-    {{-- <script>
+    <script>
         $(document).ready(function() {
 
             tinymce.init({
@@ -357,7 +500,7 @@
                 selector: '#step4'
             });
         })
-    </script> --}}
+    </script>
 
     <script>
         let count = 0;
@@ -370,6 +513,23 @@
                 $(this).parents('.productdiv').remove()
             });
             clone1.appendTo('#moreproduct');
+
+
+        }
+
+
+        function removeproduct(th) {
+            th.parentNode.parentNode.parentNode.parentNode.remove();
+        }
+
+        function addtime() {
+            count += 1;
+            var clone1 = $('.producttime').clone().first();
+
+            clone1.find('.removetime').on('click', function() {
+                $(this).parents('.producttime').remove()
+            });
+            clone1.appendTo('#moretime');
 
 
         }
