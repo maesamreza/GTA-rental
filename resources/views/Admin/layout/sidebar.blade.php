@@ -32,9 +32,9 @@
                 <a href="{{ route('admin.dashboard') }}" class=" nav-link"><i
                         data-feather="monitor"></i><span>Dashboard</span></a>
             </li>
-            <li class="dropdown @yield('property') ">
+            {{-- <li class="dropdown @yield('property') ">
                 <a href="/admin/property" class=" nav-link"><i data-feather="home"></i><span>Property</span></a>
-            </li>
+            </li> --}}
             <li class="dropdown @yield('Landlord')">
                 <a href="{{ route('admin.landlord') }}" class=" nav-link"><i
                         data-feather="user"></i><span>LandLord</span></a>
