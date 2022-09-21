@@ -1,4 +1,5 @@
 @extends('Admin.layout.master')
+@section('property','active')
 @section('content')
     <div class="main-content">
         <section class="section">

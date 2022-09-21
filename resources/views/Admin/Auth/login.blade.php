@@ -34,6 +34,7 @@
     }
 
     .bg-login {
+        height:89vh;
         background: url('{{ asset('assets/img/background-img.svg') }}') no-repeat 50%,50%;
         background-size: cover;
         padding: 58px;
@@ -49,14 +50,14 @@
     <div class="loader"></div>
     <div id="app">
         <section class="section">
-            <div class="container mt-5">
+            <div class="container mt-3">
                 <div class="row">
                     <div class="col-md-6 position">
                         <img src="{{ asset('assets/img/login-logo.png') }}">
                     </div>
 
-                    <div class="offset-md-2 col-md-4 mt-5">
-                        <div class="card card-primary shadow mt-5">
+                    <div class="offset-md-2 col-md-4 ">
+                        <div class="card card-primary shadow my-5">
                             <div class="card-header">
                                 <div class="row">
                                     <div class=" col-md-12 ">
