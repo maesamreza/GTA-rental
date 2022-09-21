@@ -22,10 +22,12 @@ Route::post('/register', '\App\Http\Controllers\Api\Authcontroller@register');
 
 Route::group(['middleware' => ['auth:api']], function(){
 
+    //common route
+    Route::get('/logout', 'App\Http\Controllers\Api\Authcontroller@logout');
+    //end common route
     /// start landlord Route
      
     Route::post('/landlord/profile/update', 'App\Http\Controllers\Api\Landlord\Authcontroller@profile_update');
-    Route::get('/logout', 'App\Http\Controllers\Api\Authcontroller@logout');
     Route::get('/landlord/profile/view', 'App\Http\Controllers\Api\Landlord\Authcontroller@profile_view');
     Route::post('/landlord/change/password', 'App\Http\Controllers\Api\Landlord\Authcontroller@passwordChange');
 
@@ -33,7 +35,7 @@ Route::group(['middleware' => ['auth:api']], function(){
    /// end landlord Route
 
     Route::post('/rental/profile/update', 'App\Http\Controllers\Api\Rental\Authcontroller@profile_update');
-    Route::get('/logout', 'App\Http\Controllers\Api\Authcontroller@logout');
+    //Route::get('/logout', 'App\Http\Controllers\Api\Authcontroller@logout');
     Route::get('/rental/profile/view', 'App\Http\Controllers\Api\Rental\Authcontroller@profile_view');
     Route::post('/rental/change/password', 'App\Http\Controllers\Api\Rental\Authcontroller@passwordChange');
 

@@ -17,8 +17,8 @@ return new class extends Migration
             $table->id();
             $table->bigInteger('property_id')->unsigned();
             $table->foreign('property_id')->references('id')->on('properties')->onDelete('cascade')->onUpdate('cascade');
-            $table->string('bedroom');
-            $table->string('bathroom');
+            $table->double('bedroom',15,2);
+            $table->double('bathroom',15,2);
             $table->double('rent',15,2);
             $table->bigInteger('unit_size');
             $table->date('availability');
