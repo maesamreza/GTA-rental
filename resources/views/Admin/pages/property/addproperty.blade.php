@@ -9,6 +9,10 @@
             font-size: 14px !important;
         }
     </style>
+    @php
+        $year=date("Y");
+        //dd($year);
+    @endphp
     <div class="main-content">
         <section class="section">
             <div class="row">
@@ -23,26 +27,58 @@
                                 <div class="row">
                                     <div class="form-group col-md-12">
                                         <label for="Property Type"><i class="fas fa-home"></i> Property Type</label>
-                                        <select class="form-select" aria-label="Default select example">
-                                            <option disabled class="fs-4">All Apartment</option>
-                                            <option value="1">Apartment</option>
-                                            <option value="2">Studio</option>
-                                            <option value="3">Bachelor</option>
-                                            <option value="4">Basment</option>
-                                            <option value="5">Duplex</option>
-                                            <option value="6">Loft</option>
-                                            <option disabled class="fs-4">All House</option>
-                                            <option value="7">House</option>
-                                            <option value="8">Town House</option>
-                                            <option value="9">Multi Unit</option>
-                                            <option value="10">cabin</option>
-                                            <option value="11">cottage</option>
-                                            <option disabled class="fs-4">All Bedroom</option>
-                                            <option value="12">Private Bedroom</option>
-                                            <option value="13">Share Bedroom</option>
+                                        <select class="form-select" id="property_type" name="property_type" aria-label="Default select example">
+                                            <option value="Condo" selected>Condo</option>
+                                            <option value="Apartment">Apartment</option>
+                                            <option value="House">House</option>
+                                            <option value="Room">Room</option>
                                         </select>
                                     </div>
-                                    <div class="form-group col-md-6">
+                                    <div class="form-group col-md-12" style="display:none" id="apartment_type">
+                                        <label for="Property Type"><i class="fas fa-home"></i>Apartment Type:</label>
+                                        <select class="form-select" name="sub_property_type" aria-label="Default select example">
+                                            <option value="Apartment" selected>Apartment</option>
+                                            <option value="Studio">Studio</option>
+                                            <option value="Bachelor">Bachelor</option>
+                                            <option value="Basment">Basment</option>
+                                            <option value="Duplex">Duplex</option>
+                                            <option value="Loft">Loft</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-md-12" id="house_type" style="display:none">
+                                        <label for="Property Type"><i class="fas fa-home"></i>House Type:</label>
+                                        <select class="form-select" name="sub_property_type" aria-label="Default select example">
+                                            <option value="House" selected>House</option>
+                                            <option value="Town House">Town House</option>
+                                            <option value="Multi Unit">Multi Unit</option>
+                                            <option value="Cabin">Cabin</option>
+                                            <option value="Cottage">Cottage</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-md-12" id="room_type" style="display:none">
+                                        <label for="Property Type"><i class="fas fa-home"></i>Room Type:</label>
+                                        <select class="form-select" name="sub_property_type" aria-label="Default select example">
+                                            <option value="Private Room" selected>Private Room</option>
+                                            <option value="Shared Room">Shared Room</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-md-10">
+                                        <label for="parking-type"><i
+                                                class="
+                                            fas fa-parking"></i>
+                                            Address</label>
+                                        <input class="form-control" type="text" name="address" tabindex="2"
+                                            required />
+                                    </div>
+                                    <div class="form-group col-md-2">
+                                        <label for="parking-type"><i
+                                                class="
+                                            fas fa-parking"></i>
+                                            Unit</label>
+                                        <input class="form-control" type="text" name="unit" tabindex="2"
+                                            required />
+                                    </div>
+                                    {{-- <div class="form-group col-md-6">
                                         <label for="Price range form"><i
                                                 class="
                                             fas fa-money-bill-wave"></i>
@@ -55,6 +91,126 @@
                                             range From</label>
                                         <input class="form-control" type="number" name="price to" tabindex="2"
                                             required />
+                                    </div> --}}
+                                    
+
+
+                                    <h4 class="text-success my-3  text-center">Detail Property</h4>
+                                    {{-- <div class="form-group col-md-6">
+                                        <label for="parking-type"><i
+                                                class="
+                                            fas fa-warehouse"></i>
+                                            Property Type</label>
+                                        <select class="form-select form-control" aria-label="Default select example">
+                                            <option selected>Select one</option>
+                                            <option value="1">All Apartment</option>
+                                            <option value="2">All House</option>
+                                            <option value="2">All Bedroom</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="parking-type"><i
+                                                class="
+                                        fas fa-warehouse"></i>
+                                            Property
+                                            SubType</label>
+                                        <select class="form-select form-control" aria-label="Default select example">
+                                            <option>All Apartment</option>
+                                        </select>
+                                    </div> --}}
+
+                                    {{-- Utilites --}}
+                                    <div class="form-group col-md-6">
+                                        <label for="unit"><i
+                                                class="
+                                            fas fa-plug"></i>
+                                            Utilies Included</label>
+
+                                        <select class="selectpicker form-control" multiple
+                                            aria-label="Default select example" data-live-search="true">
+                                            <option value="">Cable</option>
+                                            <option value="">Heating</option>
+                                            <option value="">Hydro/Electricity</option>
+                                            <option value="">Wifi/Internet</option>
+                                            <option value="">Saltelite TV</option>
+                                            <option value="">Water</option>
+                                        </select>
+                                    </div>
+                                    {{-- Categories --}}
+                                    <div class="form-group col-md-6">
+                                        <label for="unit">
+                                            <i class="material-icons">more_horiz</i> Categories</label>
+
+                                        <select class="selectpicker form-control" multiple
+                                            aria-label="Default select example" data-live-search="true">
+                                            <option value="">Coporate Housing</option>
+                                            <option value="">Student Housing</option>
+                                            <option value="">Senior Housing</option>
+                                            <option value="">Co-op Housing</option>
+                                            <option value="">Sublet</option>
+                                            <option value="">Vacation</option>
+                                        </select>
+                                    </div>
+                                    {{-- Year --}}
+                                    <div class="form-group col-md-6">
+                                        <label for="unit"><i class="fas fa-calendar"></i> Year</label>
+                                         <select class="form-control form-select">
+                                            @for($i = 1800; $i <= $year; $i++)
+                                                <option value="{{$i}}">{{$i}}</option>
+                                            @endfor
+                                        </select>
+                                    </div>
+                                    {{-- Pet Firendly --}}
+                                    <div class="form-group col-md-6">
+                                        <label for="unit">
+                                            <i class="material-icons">pets</i> Pet Firendly</label>
+                                        <select class="form-control form-select">
+                                            <option>Yes</option>
+                                            <option>No</option>
+                                        </select>
+                                    </div>
+                                    {{-- Furnished? --}}
+                                    <div class="form-group col-md-6">
+                                        <label for="unit"><i class="fas fa-hotel"></i> Furnished?</label>
+                                        <select class="form-control form-select">
+                                            <option>Yes</option>
+                                            <option>No</option>
+                                        </select>
+                                    </div>
+                                    {{-- Short Term? --}}
+                                    <div class="form-group col-md-6">
+                                        <label for="unit"><i
+                                                class="
+                                        fas fa-file-contract"></i>
+                                            Short Term?</label>
+                                        <select class="form-control form-select">
+                                            <option>Yes</option>
+                                            <option>No</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="Lease-terms"><i
+                                                class="
+                                            fas fa-newspaper"></i>
+                                            Lease terms</label>
+                                        <select class="form-control form-select">
+                                            <option value="yearly">Yearly</option>
+                                            <option value="monthly">Monthly</option>
+                                            <option value="negotiable">Negotiable</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="parking-type"><i
+                                                class="
+                                            fas fa-parking"></i>
+                                            Parking Type</label>
+                                        <select class="form-control form-select">
+                                            <option value="No Parking">No Parking</option>
+                                            <option value="Garage">Garage</option>
+                                            <option value="Driveway">Driveway</option>
+                                            <option value="Underg">Underg</option>
+                                            <option value="Street">Street</option>
+                                        </select>
                                     </div>
                                     <h4 class="text-success my-3  text-center">Floor Plans</h4>
 
@@ -112,55 +268,26 @@
                                     </div>
                                     <div id="moreproduct"> </div>
 
-
-                                    <h4 class="text-success my-3  text-center">About Property</h4>
-                                    <div class="form-group col-md-6">
-                                        <label for="parking-type"><i
-                                                class="
-                                            fas fa-warehouse"></i>
-                                            Property Type</label>
-                                        <select class="form-select form-control" aria-label="Default select example">
-                                            <option selected>Select one</option>
-                                            <option value="1">All Apartment</option>
-                                            <option value="2">All House</option>
-                                            <option value="2">All Bedroom</option>
-                                        </select>
+                                    <h4 class="text-success my-3  text-center">Photos</h4>
+                                    <div class="form-group col-md-12">
+                                        <div class="dropzone" id="file-dropzone"></div>
                                     </div>
-                                    <div class="form-group col-md-6">
-                                        <label for="parking-type"><i
+                                    <div class="form-group col-md-12">
+                                        <label for="desc"><i
                                                 class="
-                                        fas fa-warehouse"></i>
-                                            Property
-                                            SubType</label>
-                                        <select class="form-select form-control" aria-label="Default select example">
-                                            <option>All Apartment</option>
-                                        </select>
+                                            fas fa-sticky-note"></i>
+                                            Description</label>
+                                        <textarea name="question" id="step1" style="height: 10vh " class="form-control"></textarea>
                                     </div>
-
-                                    <div class="form-group col-md-6">
-                                        <label for="parking-type"><i
-                                                class="
-                                            fas fa-parking"></i>
-                                            Parking Type</label>
-                                        <input class="form-control" type="text" name="Parking-Type" tabindex="2"
-                                            required />
-                                    </div>
-                                    <div class="form-group col-md-6">
+                                    {{-- <div class="form-group col-md-4">
                                         <label for="Parking-Spot"><i
                                                 class="
                                             fas fa-parking"></i>
                                             Parking Spot</label>
                                         <input class="form-control" type="text" name="Parking-Spot" tabindex="2"
                                             required />
-                                    </div>
-                                    <div class="form-group col-md-6">
-                                        <label for="Lease-terms"><i
-                                                class="
-                                            fas fa-newspaper"></i>
-                                            Lease terms</label>
-                                        <input class="form-control" type="text" name="Lease-terms" tabindex="2"
-                                            required />
-                                    </div>
+                                    </div> --}}
+                                    
                                     {{-- <div class="form-group col-md-6">
                                         <label for="Shorts-terms"><i
                                                 class="
@@ -182,88 +309,10 @@
                                         <input class="form-control" type="text" name="Year-Build" tabindex="2"
                                             required />
                                     </div> --}}
-                                    <div class="form-group col-md-12">
-                                        <label for="desc"><i
-                                                class="
-                                            fas fa-sticky-note"></i>
-                                            Description</label>
-                                        <textarea name="question" id="step1" style="height: 10vh " class="form-control"></textarea>
-                                    </div>
+                                   
                                     <h4 class="text-success text-center">Features And Amenities</h4>
-                                    {{-- Year --}}
-                                    <div class="form-group col-md-3">
-                                        <label for="unit"><i class="fas fa-calendar"></i> Year</label>
-                                        <input type="month" class="form-control" placeholder="MMMM/YY" name=""
-                                            id="">
-                                    </div>
-                                    {{-- Pet Firendly --}}
-                                    <div class="form-group col-md-3">
-                                        <label for="unit">
-                                            <i class="material-icons">pets</i> Pet Firendly</label>
-                                        <select class="form-control form-select">
-                                            <option>Yes</option>
-                                            <option>No</option>
-                                        </select>
-                                    </div>
-                                    {{-- Furnished? --}}
-                                    <div class="form-group col-md-3">
-                                        <label for="unit"><i class="fas fa-hotel"></i> Furnished?</label>
-                                        <select class="form-control form-select">
-                                            <option>Yes</option>
-                                            <option>No</option>
-                                        </select>
-                                    </div>
-                                    {{-- Short Term? --}}
-                                    <div class="form-group col-md-3">
-                                        <label for="unit"><i
-                                                class="
-                                        fas fa-file-contract"></i>
-                                            Short Term?</label>
-                                        <select class="form-control form-select">
-                                            <option>Yes</option>
-                                            <option>No</option>
-                                        </select>
-                                    </div>
-                                    {{-- Date and time --}}
-                                    <div class="producttime">
-                                        <div class="row">
-                                            <div class="form-group col-md-3">
-                                                <label for=""><i class="fas fa-calendar"></i> Date</label>
-                                                <input type="date" class="form-control" name=""
-                                                    id="">
-                                            </div>
-                                            <div class="form-group col-md-3">
-                                                <label for=""><i class="fas fa-clock"></i> Start Time</label>
-                                                <input type="time" class="form-control" name=""
-                                                    id="">
-                                            </div>
-                                            <div class="form-group col-md-3">
-                                                <label for=""><i class="fas fa-clock"></i> End Time</label>
-                                                <input type="time" class="form-control" name=""
-                                                    id="">
-                                            </div>
-
-                                            <div class="form-group col-md-2">
-                                                <div class="row mt-32 ">
-                                                    <div class="col-md-6 ">
-                                                        <button type="button" class="btn  w-100 border text-success "
-                                                            title="Add" onclick="addtime()">
-                                                            <i data-feather="plus"></i>
-
-                                                        </button>
-                                                    </div>
-                                                    <div class="col-md-6 text-center ">
-                                                        <button type="button" title="remove"
-                                                            class="btn  text-danger border w-100 removetime
-                        ">
-                                                            <i data-feather="minus"></i>
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div id="moretime"></div>
+                                    
+                                   
                                     {{-- Comercial Building --}}
                                     <div class="form-group col-md-6">
                                         <label for="unit"><i
@@ -426,38 +475,52 @@
                                         </select>
 
                                     </div>
-                                    {{-- Utilites --}}
-                                    <div class="form-group col-md-6">
-                                        <label for="unit"><i
-                                                class="
-                                            fas fa-plug"></i>
-                                            Utilies Included</label>
+                                    <h4 class="text-success text-center">Open House Dates</h4>
+                                     {{-- Date and time --}}
+                                    <div class="producttime">
+                                        <div class="row">
+                                            <div class="form-group col-md-3">
+                                                <label for=""><i class="fas fa-calendar"></i> Date</label>
+                                                <input type="date" class="form-control" name=""
+                                                    id="">
+                                            </div>
+                                            <div class="form-group col-md-3">
+                                                <label for=""><i class="fas fa-clock"></i> Start Time</label>
+                                                <input type="time" class="form-control" name=""
+                                                    id="">
+                                            </div>
+                                            <div class="form-group col-md-3">
+                                                <label for=""><i class="fas fa-clock"></i> End Time</label>
+                                                <input type="time" class="form-control" name=""
+                                                    id="">
+                                            </div>
 
-                                        <select class="selectpicker form-control" multiple
-                                            aria-label="Default select example" data-live-search="true">
-                                            <option value="">Cable</option>
-                                            <option value="">Heating</option>
-                                            <option value="">Hydro/Electricity</option>
-                                            <option value="">Wifi/Internet</option>
-                                            <option value="">Saltelite TV</option>
-                                            <option value="">Water</option>
-                                        </select>
-                                    </div>
-                                    {{-- Categories --}}
-                                    <div class="form-group col-md-6">
-                                        <label for="unit">
-                                            <i class="material-icons">more_horiz</i> Categories</label>
+                                            <div class="form-group col-md-2">
+                                                <div class="row mt-32 ">
+                                                    <div class="col-md-6 ">
+                                                        <button type="button" class="btn  w-100 border text-success "
+                                                            title="Add" onclick="addtime()">
+                                                            <i data-feather="plus"></i>
 
-                                        <select class="selectpicker form-control" multiple
-                                            aria-label="Default select example" data-live-search="true">
-                                            <option value="">Coporate Housing</option>
-                                            <option value="">Student Housing</option>
-                                            <option value="">Senior Housing</option>
-                                            <option value="">Co-op Housing</option>
-                                            <option value="">Sublet</option>
-                                            <option value="">Vacation</option>
-                                        </select>
+                                                        </button>
+                                                    </div>
+                                                    <div class="col-md-6 text-center ">
+                                                        <button type="button" title="remove"
+                                                            class="btn  text-danger border w-100 removetime">
+                                                            <i data-feather="minus"></i>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
+                                    <div id="moretime"></div>
+                                    
+                                   
+                                    {{-- <div method="post" action="{{route('admin.uploadpropertyImage')}}" class="dropzone form-group" id="my-awesome-dropzone">
+                                       
+                                        <input type="" class="d-none" name="" />
+                                    </div> --}}
 
                                     <div class="row">
                                         <div class="offset-md-4 col-md-4 offset-md-4">
@@ -500,6 +563,29 @@
             tinymce.init({
                 selector: '#step4'
             });
+
+            $(document).on('change', '#property_type', function() {
+               var property_type=$(this).val();
+               //alert(property_type);
+               if(property_type=="Apartment"){
+                 $('#apartment_type').show()
+                 $('#house_type').hide()
+                 $('#room_type').hide()
+               }else if(property_type=="House"){
+                 $('#apartment_type').hide()
+                 $('#house_type').show()
+                 $('#room_type').hide()
+               }else if(property_type=="Room"){
+                 $('#apartment_type').hide()
+                 $('#house_type').hide()
+                 $('#room_type').show()
+               }else{
+                 $('#apartment_type').hide()
+                 $('#house_type').hide()
+                 $('#room_type').hide()
+               }
+            });
+
         })
     </script>
 
@@ -540,4 +626,36 @@
             th.parentNode.parentNode.parentNode.parentNode.remove();
         }
     </script>
+    
+<script>
+  Dropzone.options.fileDropzone = {
+    url: '{{ route("admin.uploadpropertyImage") }}',
+    acceptedFiles: ".jpeg,.jpg,.png,.gif",
+    addRemoveLinks: true,
+    maxFilesize: 8,
+    headers: {
+    'X-CSRF-TOKEN': "{{ csrf_token() }}"
+    },
+    removedfile: function(file)
+    {
+      var name = file.upload.filename;
+      $.ajax({
+        type: 'POST',
+        url: '{{ route("admin.removepropertyImage") }}',
+        data: { "_token": "{{ csrf_token() }}", name: name},
+        success: function (data){
+            console.log("File has been successfully removed!!");
+        },
+        error: function(e) {
+            console.log(e);
+        }});
+        var fileRef;
+        return (fileRef = file.previewElement) != null ?
+        fileRef.parentNode.removeChild(file.previewElement) : void 0;
+    },
+    success: function (file, response) {
+      console.log(file);
+    },
+  }
+  </script>
 @endsection

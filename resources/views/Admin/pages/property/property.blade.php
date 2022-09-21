@@ -12,7 +12,7 @@
                                     <h4>PROPERTIES</h4>
                                 </div>
                                 <div class="offset-xl-3 col-xl-3">
-                                    <a href="/admin/addproperty" class="btn btn-success btn-block">Add Property</a>
+                                    <a href="{{route('admin.addproperty')}}" class="btn btn-success btn-block">Add Property</a>
                                 </div>
                             </div>
                         </div>

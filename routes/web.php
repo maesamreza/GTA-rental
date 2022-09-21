@@ -74,6 +74,17 @@ Route::prefix('admin')->namespace('Admin')->group(function () {
         Route::post('/editrentalprocess',['as'=>'admin.editrentalprocess','uses'=>'\App\Http\Controllers\Admin\CustomerController@update']);
         Route::get('/deleterental/{id}',['as'=>'admin.deleterental','uses'=>'\App\Http\Controllers\Admin\CustomerController@delete']);
 
+        // property route
+        Route::get('/addproperty',['as'=>'admin.addproperty','uses'=>'\App\Http\Controllers\Admin\PropertyController@addView']);
+        // Route::post('/addpropertyprocess',['as'=>'admin.addpropertyprocess','uses'=>'\App\Http\Controllers\Admin\PropertyController@store']);
+         Route::get('/property',['as'=>'admin.property','uses'=>'\App\Http\Controllers\Admin\PropertyController@index']);
+        // Route::get('/editproperty/{id}',['as'=>'admin.editproperty','uses'=>'\App\Http\Controllers\Admin\PropertyController@edit']);
+        // Route::post('/editpropertyprocess',['as'=>'admin.editpropertyprocess','uses'=>'\App\Http\Controllers\Admin\PropertyController@update']);
+        // Route::get('/deleteproperty/{id}',['as'=>'admin.deleteproperty','uses'=>'\App\Http\Controllers\Admin\PropertyController@delete']);
+        Route::post('/uploadpropertyImage',['as'=>'admin.uploadpropertyImage','uses'=>'\App\Http\Controllers\Admin\PropertyController@fileStore']);
+        Route::post('/removepropertyImage',['as'=>'admin.removepropertyImage','uses'=>'\App\Http\Controllers\Admin\PropertyController@remvoeFile']);
+        // end property route
+
     });
 });
 
@@ -121,8 +132,8 @@ Route::prefix('customer')->namespace('Customer')->group(function () {
 
     });
 });
-Route::view('admin/property','Admin.pages.property.property');
-Route::view('admin/addproperty','Admin.pages.property.addproperty');
+//Route::view('admin/property','Admin.pages.property.property');
+//Route::view('admin/addproperty','Admin.pages.property.addproperty');
 Route::view('admin/editproperty','Admin.pages.property.edit');
 // Route::view('admin/landlord','Admin.pages.landlord.landlord');
 // Route::view('admin/addlandlord','Admin.pages.landlord.addlandlord');
