@@ -13,6 +13,7 @@ class PropertyController extends Controller
     public function index(){
         Property::where("is_updated",false)->delete();
         $property=Property::get();
+        session()->forget('propertyId');
         return view('Admin.pages.property.property',compact('property'));
     }
 
@@ -24,9 +25,15 @@ class PropertyController extends Controller
             if($property->save()){
                 session()->put('propertyId', $property->id);
             }
+            $id=session()->get('propertyId');
+            $property =Property::with('propertyImage')->where("id",$id)->first();
+        }else{
+            $id=session()->get('propertyId');
+            $property =Property::with('propertyImage')->where("id",$id)->first();
         }
+        //dd($property);
         //return session()->get('propertyId');
-        return view('Admin.pages.property.addproperty');
+        return view('Admin.pages.property.addproperty',compact('property'));
     }
 
     // public function store(Request $request){
@@ -53,7 +60,9 @@ class PropertyController extends Controller
 
     public function edit($id){
         //$customer=User::where("role_id",3)->where('id',$id)->first();
-        $property=Property::where('id',$id)->get();
+        $property=Property::with('propertyImage','buildingFeature','category','commercialBuilding','floor','nearBy','unitFeature','utilityInclude','openHouseDate')->where('id',$id)->first();
+        //dd($property);
+        session()->put('propertyId', $id);
         return view('Admin.pages.property.edit',compact('property'));
     }
 
@@ -62,34 +71,36 @@ class PropertyController extends Controller
         $controlls = $request->all();
         //dd($controlls);
         $id=session()->get('propertyId');
+        //dd($id);
         $rules = array(
             "property_type" => "required|max:150",
             "sub_property_type" => "nullable|max:150",
             "address" => "required|min:10|max:20",
             "lat" => "required",
             "lng" => "required",
-            'unit' => "required|max:150",
-            "year_build"=>"required|max:4",
-            "pet_friendly"=>"required",
-            "furnished"=>"required",
+            'unit' => "nullable|max:150",
+            "year_build"=>"nullable|max:4",
+            "pet_friendly"=>"nullable",
+            "furnished"=>"nullable",
+            "short_term"=>"nullable",
             "lease_term"=>"required",
-            "parking_type"=>"required",
-            "parking_spots"=>"required",
-            "description"=>"required|max:5000",
-            "untility_name"=>"required",
-            "category_name"=>"required",
+            "parking_type"=>"nullable",
+            //"parking_spots"=>"required",
+            "description"=>"nullable|max:5000",
+            "untility_name"=>"nullable",
+            "category_name"=>"nullable",
             "bedroom.*"=>"required",
             "bathroom.*"=>"required",
             "rent.*"=>"required",
-            "unit_size.*"=>"required",
+            "unit_size.*"=>"nullable",
             "availability.*"=>"required",
             "commercial_building_name"=>"nullable",
             "building_feature_name"=>"nullable",
             "unit_feature_name"=>"nullable",
             "near_by_name"=>"nullable",
-            "date"=>"required",
-            "start_time"=>"required",
-            "end_time"=>"required",
+            "date"=>"nullable",
+            "start_time"=>"nullable",
+            "end_time"=>"nullable",
         );
 
         $validator = Validator::make($controlls, $rules);
@@ -97,6 +108,7 @@ class PropertyController extends Controller
             return redirect()->back()->withErrors($validator)->withInput($controlls);
         }
         $property =Property::find($id);
+        //dd($property);
         $property->property_type = $request->property_type;
         $property->sub_property_type = $request->sub_property_type;
         $property->address = $request->address;
@@ -108,78 +120,83 @@ class PropertyController extends Controller
         $property->furnished = $request->furnished;
         $property->lease_term = $request->lease_term;
         $property->parking_type = $request->parking_type;
-        $property->parking_spots = $request->parking_spots;
+        $property->short_term = $request->short_term;
         $property->description = $request->description;
-
-        //$property->verify_code =$verify_code;
-        // if($request->hasFile('image')){
-        //     $file = $request->file('image');
-        //     $fileType = "image-";
-        //     $filename = $fileType.time()."-".rand().".".$file->getClientOriginalExtension();
-        //     $file->storeAs("/public/profile", $filename);
-        //     $property->image = $filename;
-        // }
         $property->is_active = 1;
         $property->is_updated = 1;
         if($property->save()){
-
-            for ($i=0; $i <count($request->untility_name) ; $i++) { 
-                $utilityInclude=new UtilityInclude;
-                $utilityInclude->property_id=$property->id;
-                $utilityInclude->name=$request->untility_name[$i];
-                $utilityInclude->save();
+            if(!empty($request->untility_name)){
+                for ($i=0; $i <count($request->untility_name) ; $i++) { 
+                    $utilityInclude=new UtilityInclude;
+                    $utilityInclude->property_id=$property->id;
+                    $utilityInclude->name=$request->untility_name[$i];
+                    $utilityInclude->save();
+                }
             }
-
-            for ($i=0; $i <count($request->category_name) ; $i++) { 
-                $category=new Category;
-                $category->property_id=$property->id;
-                $category->name=$request->category_name[$i];
-                $category->save();
+            if(!empty($request->category_name)){
+                for ($i=0; $i <count($request->category_name) ; $i++) { 
+                    $category=new Category;
+                    $category->property_id=$property->id;
+                    $category->name=$request->category_name[$i];
+                    $category->save();
+                }
             }
-
-            for ($i=0; $i <count($request->bedroom) ; $i++) { 
-                $floor=new Floor;
-                $floor->property_id=$property->id;
-                $floor->bedroom=$request->bedroom[$i];
-                $floor->bathroom=$request->bathroom[$i];
-                $floor->rent=$request->rent[$i];
-                $floor->unit_size=$request->unit_size[$i];
-                $floor->availability=$request->availability[$i];
-                $floor->save();
+            if(!empty($request->bedroom)){
+                for ($i=0; $i <count($request->bedroom) ; $i++) { 
+                    $floor=new Floor;
+                    $floor->property_id=$property->id;
+                    $floor->bedroom=$request->bedroom[$i];
+                    $floor->bathroom=$request->bathroom[$i];
+                    $floor->rent=$request->rent[$i];
+                    $floor->unit_size=$request->unit_size[$i];
+                    $floor->availability=$request->availability[$i];
+                    $floor->save();
+                }
             }
-            for ($i=0; $i <count($request->commercial_building_name) ; $i++) { 
-                $commercialBuilding=new CommercialBuilding;
-                $commercialBuilding->property_id=$property->id;
-                $commercialBuilding->name=$request->commercial_building_name[$i];
-                $commercialBuilding->save();
+            if(!empty($request->commercial_building_name)){
+                for ($i=0; $i <count($request->commercial_building_name) ; $i++) { 
+                    $commercialBuilding=new CommercialBuilding;
+                    $commercialBuilding->property_id=$property->id;
+                    $commercialBuilding->name=$request->commercial_building_name[$i];
+                    $commercialBuilding->save();
+                }
             }
-            for ($i=0; $i <count($request->building_feature_name) ; $i++) { 
-                $buildingFeature=new BuildingFeature;
-                $buildingFeature->property_id=$property->id;
-                $buildingFeature->name=$request->building_feature_name[$i];
-                $buildingFeature->save();
+            if(!empty($request->building_feature_name)){
+                for ($i=0; $i <count($request->building_feature_name) ; $i++) { 
+                    $buildingFeature=new BuildingFeature;
+                    $buildingFeature->property_id=$property->id;
+                    $buildingFeature->name=$request->building_feature_name[$i];
+                    $buildingFeature->save();
+                }
             }
-            for ($i=0; $i <count($request->unit_feature_name) ; $i++) { 
-                $unitFeature=new UnitFeature;
-                $unitFeature->property_id=$property->id;
-                $unitFeature->name=$request->unit_feature_name[$i];
-                $unitFeature->save();
+            if(!empty($request->unit_feature_name)){
+                for ($i=0; $i <count($request->unit_feature_name) ; $i++) { 
+                    $unitFeature=new UnitFeature;
+                    $unitFeature->property_id=$property->id;
+                    $unitFeature->name=$request->unit_feature_name[$i];
+                    $unitFeature->save();
+                }
             }
-            for ($i=0; $i <count($request->near_by_name) ; $i++) { 
-                $nearBy=new NearBy;
-                $nearBy->property_id=$property->id;
-                $nearBy->name=$request->near_by_name[$i];
-                $nearBy->save();
+            if(!empty($request->near_by_name)){
+                for ($i=0; $i <count($request->near_by_name) ; $i++) { 
+                    $nearBy=new NearBy;
+                    $nearBy->property_id=$property->id;
+                    $nearBy->name=$request->near_by_name[$i];
+                    $nearBy->save();
+                }
             }
-
-            for ($i=0; $i <count($request->date) ; $i++) { 
-                $openHouseDate=new OpenHouseDate;
-                $openHouseDate->property_id=$property->id;
-                $openHouseDate->date=$request->date[$i];
-                $openHouseDate->start_time=$request->start_time[$i];
-                $openHouseDate->end_time=$request->end_time[$i];
-                $openHouseDate->save();
+            if(!empty($request->date) && $request->date[0]!=null){
+                //dd($request->date);
+                for ($i=0; $i <count($request->date) ; $i++) { 
+                    $openHouseDate=new OpenHouseDate;
+                    $openHouseDate->property_id=$property->id;
+                    $openHouseDate->date=$request->date[$i];
+                    $openHouseDate->start_time=$request->start_time[$i];
+                    $openHouseDate->end_time=$request->end_time[$i];
+                    $openHouseDate->save();
+                }
             }
+            session()->forget('propertyId');
             return redirect()->back()->withSuccess('Property Added Successfully');
         }
         $request->session()->put('alert', 'danger');
@@ -198,35 +215,37 @@ class PropertyController extends Controller
             "address" => "required|min:10|max:20",
             "lat" => "required",
             "lng" => "required",
-            'unit' => "required|max:150",
-            "year_build"=>"required|max:4",
-            "pet_friendly"=>"required",
-            "furnished"=>"required",
+            'unit' => "nullable|max:150",
+            "year_build"=>"nullable|max:4",
+            "pet_friendly"=>"nullable",
+            "furnished"=>"nullable",
+            "short_term"=>"nullable",
             "lease_term"=>"required",
-            "parking_type"=>"required",
-            "parking_spots"=>"required",
-            "description"=>"required|max:5000",
-            "untility_name"=>"required",
-            "category_name"=>"required",
+            "parking_type"=>"nullable",
+            //"parking_spots"=>"required",
+            "description"=>"nullable|max:5000",
+            "untility_name"=>"nullable",
+            "category_name"=>"nullable",
             "bedroom.*"=>"required",
             "bathroom.*"=>"required",
             "rent.*"=>"required",
-            "unit_size.*"=>"required",
+            "unit_size.*"=>"nullable",
             "availability.*"=>"required",
             "commercial_building_name"=>"nullable",
             "building_feature_name"=>"nullable",
             "unit_feature_name"=>"nullable",
             "near_by_name"=>"nullable",
-            "date"=>"required",
-            "start_time"=>"required",
-            "end_time"=>"required",
+            "date"=>"nullable",
+            "start_time"=>"nullable",
+            "end_time"=>"nullable",
         );
 
         $validator = Validator::make($controlls, $rules);
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput($controlls);
         }
-        $property =Property::find($request->id);
+        $property =Property::find($id);
+        //dd($property);
         $property->property_type = $request->property_type;
         $property->sub_property_type = $request->sub_property_type;
         $property->address = $request->address;
@@ -238,17 +257,8 @@ class PropertyController extends Controller
         $property->furnished = $request->furnished;
         $property->lease_term = $request->lease_term;
         $property->parking_type = $request->parking_type;
-        $property->parking_spots = $request->parking_spots;
+        $property->short_term = $request->short_term;
         $property->description = $request->description;
-
-        //$property->verify_code =$verify_code;
-        // if($request->hasFile('image')){
-        //     $file = $request->file('image');
-        //     $fileType = "image-";
-        //     $filename = $fileType.time()."-".rand().".".$file->getClientOriginalExtension();
-        //     $file->storeAs("/public/profile", $filename);
-        //     $property->image = $filename;
-        // }
         $property->is_active = 1;
         $property->is_updated = 1;
         if($property->save()){
@@ -266,13 +276,15 @@ class PropertyController extends Controller
                 $category->name=$request->category_name[$i];
                 $category->save();
             }
-            Floor::where("property_id",$property->id)->whereInNot('id',$request->floor_id)->delete();
+            Floor::where("property_id",$property->id)->whereNotIn('id',$request->floor_id)->delete();
             for ($i=0; $i <count($request->bedroom) ; $i++) { 
-                $floor=Floor::where('id',$request->floor_id[$i])->first();
-                if(empty($floor)){
-                  $floor=new Floor;
+
+                if($request->floor_id[$i]!=null){
+                    $floor=Floor::where('id',$request->floor_id[$i])->first();
+                }else{
+                    $floor=new Floor;
+                    $floor->property_id=$property->id;
                 }
-                $floor->property_id=$property->id;
                 $floor->bedroom=$request->bedroom[$i];
                 $floor->bathroom=$request->bathroom[$i];
                 $floor->rent=$request->rent[$i];
@@ -308,18 +320,23 @@ class PropertyController extends Controller
                 $nearBy->name=$request->near_by_name[$i];
                 $nearBy->save();
             }
-            OpenHouseDate::where("property_id",$property->id)->whereInNot('id',$request->open_house_id)->delete();
-            for ($i=0; $i <count($request->date) ; $i++) { 
-                $floor=OpenHouseDate::where('id',$request->open_house_id[$i])->first();
-                if(empty($floor)){
-                    $openHouseDate=new OpenHouseDate;
+            if(!empty($request->date) && $request->date[0]!=null){
+                OpenHouseDate::where("property_id",$property->id)->whereNotIn('id',$request->open_house_id)->delete();
+                for ($i=0; $i <count($request->date) ; $i++) { 
+                    if($request->open_house_id[$i]!=null){
+                        $openHouseDate=OpenHouseDate::where('id',$request->open_house_id[$i])->first();
+                    }else{
+                        $openHouseDate=new OpenHouseDate;
+                        $openHouseDate->property_id=$property->id;
+                    }
+                    
+                    $openHouseDate->date=$request->date[$i];
+                    $openHouseDate->start_time=$request->start_time[$i];
+                    $openHouseDate->end_time=$request->end_time[$i];
+                    $openHouseDate->save();
                 }
-                $openHouseDate->property_id=$property->id;
-                $openHouseDate->date=$request->date[$i];
-                $openHouseDate->start_time=$request->start_time[$i];
-                $openHouseDate->end_time=$request->end_time[$i];
-                $openHouseDate->save();
             }
+            session()->forget('propertyId');
             return redirect()->back()->withSuccess('Property Added Successfully');
         }
         $request->session()->put('alert', 'danger');
@@ -367,7 +384,9 @@ class PropertyController extends Controller
         if ($request->file('file')) {
             $file = $request->file('file');
             $fileType = "image-";
-            $filename = $fileType.time()."-".rand().".".$file->getClientOriginalExtension();
+            //$filename = $file->getClientOriginalExtension();
+            $filename = $file->getClientOriginalName();
+            //$filename = $fileType.time()."-".rand().".".$file->getClientOriginalExtension();
             $file->storeAs("/public/propertyimage", $filename);
         }
         $propertyImage = new PropertyImage();
@@ -380,7 +399,14 @@ class PropertyController extends Controller
     public function remvoeFile(Request $request)
     {
         $name =  $request->get('name');
-        PropertyImage::where(['name' => $name])->delete();
+        PropertyImage::where(['image' => $name])->delete();
         return $name;
+    }
+
+    public function remvoeImageByid(Request $request)
+    {
+        $id =  $request->get('id');
+        PropertyImage::where(['id' => $id])->delete();
+        return $id;
     }
 }

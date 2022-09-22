@@ -76,13 +76,14 @@ Route::prefix('admin')->namespace('Admin')->group(function () {
 
         // property route
         Route::get('/addproperty',['as'=>'admin.addproperty','uses'=>'\App\Http\Controllers\Admin\PropertyController@addView']);
-        // Route::post('/addpropertyprocess',['as'=>'admin.addpropertyprocess','uses'=>'\App\Http\Controllers\Admin\PropertyController@store']);
+        Route::post('/addpropertyprocess',['as'=>'admin.addpropertyprocess','uses'=>'\App\Http\Controllers\Admin\PropertyController@store']);
          Route::get('/property',['as'=>'admin.property','uses'=>'\App\Http\Controllers\Admin\PropertyController@index']);
-        // Route::get('/editproperty/{id}',['as'=>'admin.editproperty','uses'=>'\App\Http\Controllers\Admin\PropertyController@edit']);
-        // Route::post('/editpropertyprocess',['as'=>'admin.editpropertyprocess','uses'=>'\App\Http\Controllers\Admin\PropertyController@update']);
-        // Route::get('/deleteproperty/{id}',['as'=>'admin.deleteproperty','uses'=>'\App\Http\Controllers\Admin\PropertyController@delete']);
+         Route::get('/editproperty/{id}',['as'=>'admin.editproperty','uses'=>'\App\Http\Controllers\Admin\PropertyController@edit']);
+         Route::post('/editpropertyprocess',['as'=>'admin.editpropertyprocess','uses'=>'\App\Http\Controllers\Admin\PropertyController@update']);
+         Route::get('/deleteproperty/{id}',['as'=>'admin.deleteproperty','uses'=>'\App\Http\Controllers\Admin\PropertyController@delete']);
         Route::post('/uploadpropertyImage',['as'=>'admin.uploadpropertyImage','uses'=>'\App\Http\Controllers\Admin\PropertyController@fileStore']);
         Route::post('/removepropertyImage',['as'=>'admin.removepropertyImage','uses'=>'\App\Http\Controllers\Admin\PropertyController@remvoeFile']);
+        Route::post('/removepropertyImageById',['as'=>'admin.removepropertyImageById','uses'=>'\App\Http\Controllers\Admin\PropertyController@remvoeImageByid']);
         // end property route
 
     });

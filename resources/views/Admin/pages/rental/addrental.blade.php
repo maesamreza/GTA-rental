@@ -35,9 +35,9 @@
                                     <div class="form-group col-md-6">
                                         <label>First Name</label>
                                         <input type="text" class="form-control" name="first_name" value="{{old('first_name')}}" tabindex="2" required>
-                                        <div class="text-danger">
+                                        <span class="text-danger">
                                             {{ $errors->first('first_name') }}
-                                        </div>
+                                        </span>
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label>LastName</label>

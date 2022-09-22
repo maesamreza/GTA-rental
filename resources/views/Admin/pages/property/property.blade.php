@@ -21,37 +21,49 @@
                                 <table class="table table-striped table-hover" id="save-stage" style="width:100%;">
                                     <thead>
                                         <tr>
+                                            <th>Id</th>
                                             <th>Property Type</th>
                                             <th>Property SubType</th>
-                                            <th>Price Range</th>
+                                            <th>Address</th>
                                             <th>Status</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td>
-                                                <label class="switch ms-5">
-                                                    <input type="checkbox" checked>
-                                                    <span class="slider round"></span>
-                                                  </label>
-                                            </td>
-                                            <td>
-                                                <div class="row">
-                                                    <div class="col-md-6">
+                                       @if(!empty($property))
+                                            @foreach($property as $key => $property_val)
+                                                <tr>
+                                                    <td>{{$property_val->id}}</td>
+                                                    <td>{{$property_val->property_type}}</td>
+                                                    <td>{{$property_val->sub_property_type}}</td>
+                                                    <td>{{$property_val->address}}</td>
+                                                    <td>
+                                                        {{-- <label class="switch ms-5">
+                                                            <input type="checkbox" @if($property_val->is_active==1) checked @endif>
+                                                            <span class="slider round"></span>
+                                                        </label> --}}
+                                                        @if($property_val->is_active==0)
+                                                            Not Approved
+                                                        @else
+                                                             Approved
+                                                        @endif
+                                                    </td>
+                                                    <td>
+                                                        <div class="row">
+                                                            <div class="col-md-6">
 
-                                                        <a href="/admin/editproperty" class="btn btn-warning "><i class="fa fa-edit"></i></a>
-                                                    </div>
-                                                    <div class="col-md-6">
+                                                                <a href="{{ route('admin.editproperty', ['id' => $property_val->id]) }}" class="btn btn-warning "><i class="fa fa-edit"></i></a>
+                                                            </div>
+                                                            <div class="col-md-6">
 
-                                                        <a class="btn btn-danger "><i class="fa fa-trash"></i></a>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                        </tr>
+                                                                <a onclick="return confirm('Do You Want To Delete This Property?')"
+                                                                    href="{{ route('admin.deleteproperty', ['id' => $property_val->id]) }}" class="btn btn-danger "><i class="fa fa-trash"></i></a>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                       @endif  
 
                                     </tbody>
                                 </table>

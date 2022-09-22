@@ -23,9 +23,10 @@ return new class extends Migration
             $table->double('lat')->nullable();
             $table->double('lng')->nullable();
             $table->string('unit')->nullable();
-            $table->year('year_build')->nullable();
+            $table->string('year_build')->nullable();
             $table->string('pet_friendly')->nullable();
             $table->string('furnished')->nullable();
+            $table->string('short_term')->nullable();
             $table->string('lease_term')->nullable();
             $table->string('parking_type')->nullable();
             $table->string('parking_spots')->nullable();

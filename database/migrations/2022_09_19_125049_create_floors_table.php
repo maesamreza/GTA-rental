@@ -20,7 +20,7 @@ return new class extends Migration
             $table->double('bedroom',15,2);
             $table->double('bathroom',15,2);
             $table->double('rent',15,2);
-            $table->bigInteger('unit_size');
+            $table->bigInteger('unit_size')->nullable();
             $table->date('availability');
             $table->timestamps();
         });
