@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -11,18 +11,17 @@ use Illuminate\Support\Facades\{DB,Mail,Auth,Hash};
 class PropertyController extends Controller
 {
     public function index(){
-        Property::where("is_updated",false)->delete();
-        $property=Property::where("is_updated2","!=",false)->get();
+        Property::where("is_updated2",false)->delete();
+        $property=Property::get();
         session()->forget('propertyId');
-        return view('Admin.pages.property.property',compact('property'));
+        return response()->json(['property'=>$property],200);
     }
 
     public function addView(){
-        // $landlord=User::where("role_id",2)->get();
         if(!session()->has('propertyId')){
             $property=new Property;
             $property->user_id=Auth::guard('admin')->user()->id;
-            $property->is_updated2 = 1;
+            $property->is_updated = 1;
             if($property->save()){
                 session()->put('propertyId', $property->id);
             }
@@ -32,39 +31,15 @@ class PropertyController extends Controller
             $id=session()->get('propertyId');
             $property =Property::with('propertyImage')->where("id",$id)->first();
         }
-        //dd($property);
-        //return session()->get('propertyId');
-        return view('Admin.pages.property.addproperty',compact('property'));
+
+        return response()->json(['property'=>$property],200);
     }
 
-    // public function store(Request $request){
-
-    //     $controlls = $request->all();
-    //     //dd($controlls);
-    //     $rules = array(
-    //         "first_name" => "required|max:100",
-    //         "last_name" => "required|max:100",
-    //         "phone_number" => "required|min:10|max:20",
-    //         "email" => "required|email|unique:users,email",
-    //         "password" => "required|min:6|confirmed",
-    //         'password_confirmation' => 'required|min:6',
-    //         "image"=>'required|image|mimes:jpeg,png,jpg|max:2048'
-    //         //"role"=>"required"
-
-    //     );
-
-    //     $validator = Validator::make($controlls, $rules);
-    //     if ($validator->fails()) {
-    //         return redirect()->back()->withErrors($validator)->withInput($controlls);
-    //     }
-    // }
-
+    
     public function edit($id){
-        //$customer=User::where("role_id",3)->where('id',$id)->first();
         $property=Property::with('propertyImage','buildingFeature','category','commercialBuilding','floor','nearBy','unitFeature','utilityInclude','openHouseDate')->where('id',$id)->first();
-        //dd($property);
         session()->put('propertyId', $id);
-        return view('Admin.pages.property.edit',compact('property'));
+        return response()->json(['property'=>$property],200);
     }
 
     public function store(Request $request){
@@ -106,7 +81,7 @@ class PropertyController extends Controller
 
         $validator = Validator::make($controlls, $rules);
         if ($validator->fails()) {
-            return redirect()->back()->withErrors($validator)->withInput($controlls);
+            return response(['errors'=>$validator->errors()->all()], 422);
         }
         $property =Property::find($id);
         //dd($property);
@@ -125,6 +100,7 @@ class PropertyController extends Controller
         $property->description = $request->description;
         $property->is_active = 1;
         $property->is_updated = 1;
+        $property->is_updated2 = 1;
         if($property->save()){
             if(!empty($request->untility_name)){
                 for ($i=0; $i <count($request->untility_name) ; $i++) { 
@@ -198,10 +174,11 @@ class PropertyController extends Controller
                 }
             }
             session()->forget('propertyId');
-            return redirect()->back()->withSuccess('Property Added Successfully');
+            $response = ['status'=>true,"message" => "Property Added Successfully"];
+             return response($response, 200);
         }
-        $request->session()->put('alert', 'danger');
-        return redirect()->back()->withErrors(['errors'=>'Property Not Added Successfully']);  
+        $response = ['status'=>true,"message" => "Property Not Added Successfully"];
+        return response($response, 422);  
 
     }
 
@@ -262,6 +239,7 @@ class PropertyController extends Controller
         $property->description = $request->description;
         $property->is_active = 1;
         $property->is_updated = 1;
+        $property->is_updated2 = 1;
         if($property->save()){
             UtilityInclude::where("property_id",$property->id)->delete();
             for ($i=0; $i <count($request->untility_name) ; $i++) { 
@@ -338,50 +316,43 @@ class PropertyController extends Controller
                 }
             }
             session()->forget('propertyId');
-            return redirect()->back()->withSuccess('Property Updated Successfully');
+            $response = ['status'=>true,"message" => "Property Updated Successfully"];
+            return response($response, 200);
         }
-        $request->session()->put('alert', 'danger');
-        return redirect()->back()->withErrors(['errors'=>'Property Not Updated Successfully']);  
+        $response = ['status'=>true,"message" => "Property Not Updated Successfully"];
+        return response($response, 422);  
 
     }
 
     public function delete($id){
         $property=Property::where('id',$id)->delete();
-        return redirect()->back()->withSuccess('Property Delete Successfully');
-        //return view('',compact('customer'));
+        $response = ['status'=>true,"message" => "Property Delete Successfully"];
+        return response($response, 200);
     }
 
     public function permission(Request $request){
     
-        $user =Property::find($request->id);
+        $property =Property::find($request->id);
         $status="";
-        if($user->is_active==1){
-          $user->is_active =0;
+        if($property->is_active==1){
+          $property->is_active =0;
           $status="Deactive";
         }else{
-          $user->is_active =1;
+          $property->is_active =1;
           $status="Active"; 
         }
-        if($user->save()){
-            return redirect()->back()->withSuccess("Property $status Successfully");
-            //return redirect()->route('user.login');
-            // Mail::send('user.email.verify_code', ['verify_code' =>$verify_code], function ($message) use($request) {
-            //     $message->from('emailforhnh@gmail.com', 'Confirmation');
-            //     $message->to($request->email);
-            //     $message->subject('Verify Code');
-            // });
-            // return redirect()->route('user.verify',$user->id);
+        if($property->save()){
+            $response = ['status'=>true,"message" => "Property $status Successfully"];
+            return response($response, 200);
         }
-        $request->session()->put('alert', 'danger');
-        return redirect()->back()->withErrors(['errors'=>'Property Permission  Not Changed']);  
+        $response = ['status'=>false,"message" => "Property Permission  Not Changed"];
+        return response($response, 422);  
 
     }
 
     public function fileStore(Request $request)
     {
-        // $image = $request->file('file');
-        // $imageName = $image->getClientOriginalName();
-        // $image->move(public_path('images'),$imageName);
+
         if ($request->file('file')) {
             $file = $request->file('file');
             $fileType = "image-";
@@ -394,20 +365,27 @@ class PropertyController extends Controller
         $propertyImage->property_id=session()->get('propertyId');
         $propertyImage->image = $filename;
         $propertyImage->save();
-        return response()->json(['success'=>$filename]);
+
+        $response = ['status'=>true,"message" => "Image Upload Successfully",'filename'=>$filename];
+        return response($response, 200);
+        //return response()->json(['success'=>$filename]);
     }
 
     public function remvoeFile(Request $request)
     {
         $name =  $request->get('name');
         PropertyImage::where(['image' => $name])->delete();
-        return $name;
+        $response = ['status'=>true,"message" => "Image Delete Successfully",'name'=>$name];
+        return response($response, 200);
+        //return $name;
     }
 
     public function remvoeImageByid(Request $request)
     {
         $id =  $request->get('id');
         PropertyImage::where(['id' => $id])->delete();
-        return $id;
+        $response = ['status'=>true,"message" => "Image Delete Successfully",'id'=>$id];
+        return response($response, 200);
+        //return $id;
     }
 }

@@ -33,6 +33,8 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->boolean('is_active')->default(0);
             $table->boolean('is_updated')->default(0);
+            $table->boolean('is_updated2')->default(0);
+            //$table->boolean('is_updated')->default(0);
             $table->timestamps();
         });
     }
