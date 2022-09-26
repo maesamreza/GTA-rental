@@ -11,14 +11,16 @@ use Illuminate\Support\Facades\{DB,Mail,Auth,Hash};
 class PropertyController extends Controller
 {
     public function index(){
+        $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]/storage/propertyimage/";
         $property=Property::with('propertyImage','buildingFeature','category','commercialBuilding','floor','nearBy','unitFeature','utilityInclude','openHouseDate')->where("is_updated2","!=",false)->where("is_updated","!=",false)->get();
-        return response()->json(['property'=>$property],200);
+        return response()->json(['property'=>$property,'imagepath'=>$actual_link],200);
     }
     
     public function edit($id){
+        $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]/storage/propertyimage/";
         $property=Property::with('propertyImage','buildingFeature','category','commercialBuilding','floor','nearBy','unitFeature','utilityInclude','openHouseDate')->where('id',$id)->first();
         session()->put('propertyId', $id);
-        return response()->json(['property'=>$property],200);
+        return response()->json(['property'=>$property,'imagepath'=>$actual_link],200);
     }
     public function searchPropertyByAddress(Request $req)
     {

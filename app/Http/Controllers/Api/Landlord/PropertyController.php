@@ -12,9 +12,10 @@ class PropertyController extends Controller
 {
     public function index($id){
         Property::where("is_updated2",false)->delete();
+        $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]/storage/propertyimage/";
         $property=Property::with('propertyImage','buildingFeature','category','commercialBuilding','floor','nearBy','unitFeature','utilityInclude','openHouseDate')->where("is_updated2","!=",false)->where('user_id',$id)->get();
         session()->forget('propertyId');
-        return response()->json(['property'=>$property],200);
+        return response()->json(['property'=>$property,'imagepath'=>$actual_link],200);
     }
 
     public function addView(Request $request){
@@ -37,9 +38,10 @@ class PropertyController extends Controller
 
     
     public function edit($id){
+        $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]/storage/propertyimage/";
         $property=Property::with('propertyImage','buildingFeature','category','commercialBuilding','floor','nearBy','unitFeature','utilityInclude','openHouseDate')->where('id',$id)->first();
         session()->put('propertyId', $id);
-        return response()->json(['property'=>$property],200);
+        return response()->json(['property'=>$property,'imagepath'=>$actual_link],200);
     }
 
     public function store(Request $request){
@@ -366,7 +368,7 @@ class PropertyController extends Controller
         $propertyImage->image = $filename;
         $propertyImage->save();
 
-        $response = ['status'=>true,"message" => "Image Upload Successfully",'filename'=>$filename];
+        $response = ['status'=>true,"message" => "Image Upload Successfully",'imagepath'=>$actual_link,'filename'=>$filename];
         return response($response, 200);
         //return response()->json(['success'=>$filename]);
     }
