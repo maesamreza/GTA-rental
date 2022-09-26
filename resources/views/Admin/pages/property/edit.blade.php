@@ -570,7 +570,7 @@
                                     <h4 class="text-success text-center">Open House Dates</h4>
                                      {{-- Date and time --}}
                                     <div id="moretime" class="clonediv1">
-                                        @if(!empty($property->openHouseDate))
+                                        @if(!$property->openHouseDate->isEmpty())
                                            @foreach($property->openHouseDate as $key => $openHouseDate_value)
                                                 <div class="producttime">
                                                     <div class="row">

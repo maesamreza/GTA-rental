@@ -14,25 +14,14 @@ class PropertyController extends Controller
         Property::where("is_updated2",false)->delete();
         $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]/storage/propertyimage/";
         $property=Property::with('propertyImage','buildingFeature','category','commercialBuilding','floor','nearBy','unitFeature','utilityInclude','openHouseDate')->where("is_updated2","!=",false)->where('user_id',$id)->get();
-        session()->forget('propertyId');
         return response()->json(['property'=>$property,'imagepath'=>$actual_link],200);
     }
 
     public function addView(Request $request){
-        if(!session()->has('propertyId')){
-            $property=new Property;
-            $property->user_id=$request->user_id;
-            $property->is_updated = 1;
-            if($property->save()){
-                session()->put('propertyId', $property->id);
-            }
-            $id=session()->get('propertyId');
-            $property =Property::with('propertyImage')->where("id",$id)->first();
-        }else{
-            $id=session()->get('propertyId');
-            $property =Property::with('propertyImage')->where("id",$id)->first();
-        }
-
+        $property=new Property;
+        $property->user_id=$request->user_id;
+        $property->is_updated = 1;
+        $property->save();
         return response()->json(['property'=>$property],200);
     }
 
@@ -40,7 +29,6 @@ class PropertyController extends Controller
     public function edit($id){
         $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]/storage/propertyimage/";
         $property=Property::with('propertyImage','buildingFeature','category','commercialBuilding','floor','nearBy','unitFeature','utilityInclude','openHouseDate')->where('id',$id)->first();
-        session()->put('propertyId', $id);
         return response()->json(['property'=>$property,'imagepath'=>$actual_link],200);
     }
 
@@ -51,6 +39,7 @@ class PropertyController extends Controller
         $id=$request->property_id;
         //dd($id);
         $rules = array(
+            "property_id" => "required",
             "property_type" => "required|max:150",
             "sub_property_type" => "nullable|max:150",
             "address" => "required|min:10|max:20",
@@ -175,7 +164,6 @@ class PropertyController extends Controller
                     $openHouseDate->save();
                 }
             }
-            session()->forget('propertyId');
             $response = ['status'=>true,"message" => "Property Added Successfully"];
              return response($response, 200);
         }
@@ -210,6 +198,7 @@ class PropertyController extends Controller
             "bathroom.*"=>"required",
             "rent.*"=>"required",
             "unit_size.*"=>"nullable",
+            "floor_id.*"=>"required",
             "availability.*"=>"required",
             "commercial_building_name"=>"nullable",
             "building_feature_name"=>"nullable",
@@ -244,63 +233,77 @@ class PropertyController extends Controller
         $property->is_updated2 = 1;
         if($property->save()){
             UtilityInclude::where("property_id",$property->id)->delete();
-            for ($i=0; $i <count($request->untility_name) ; $i++) { 
-                $utilityInclude=new UtilityInclude;
-                $utilityInclude->property_id=$property->id;
-                $utilityInclude->name=$request->untility_name[$i];
-                $utilityInclude->save();
+            if(!empty($request->untility_name)){
+                for ($i=0; $i <count($request->untility_name) ; $i++) { 
+                    $utilityInclude=new UtilityInclude;
+                    $utilityInclude->property_id=$property->id;
+                    $utilityInclude->name=$request->untility_name[$i];
+                    $utilityInclude->save();
+                }
             }
             Category::where("property_id",$property->id)->delete();
-            for ($i=0; $i <count($request->category_name) ; $i++) { 
-                $category=new Category;
-                $category->property_id=$property->id;
-                $category->name=$request->category_name[$i];
-                $category->save();
+            if(!empty($request->category_name)){
+                for ($i=0; $i <count($request->category_name) ; $i++) { 
+                    $category=new Category;
+                    $category->property_id=$property->id;
+                    $category->name=$request->category_name[$i];
+                    $category->save();
+                }
             }
             Floor::where("property_id",$property->id)->whereNotIn('id',$request->floor_id)->delete();
-            for ($i=0; $i <count($request->bedroom) ; $i++) { 
+            if(!empty($request->bedroom)){
+                for ($i=0; $i <count($request->bedroom) ; $i++) { 
 
-                if($request->floor_id[$i]!=null){
-                    $floor=Floor::where('id',$request->floor_id[$i])->first();
-                }else{
-                    $floor=new Floor;
-                    $floor->property_id=$property->id;
+                    if($request->floor_id[$i]!=null){
+                        $floor=Floor::where('id',$request->floor_id[$i])->first();
+                    }else{
+                        $floor=new Floor;
+                        $floor->property_id=$property->id;
+                    }
+                    $floor->bedroom=$request->bedroom[$i];
+                    $floor->bathroom=$request->bathroom[$i];
+                    $floor->rent=$request->rent[$i];
+                    $floor->unit_size=$request->unit_size[$i];
+                    $floor->availability=$request->availability[$i];
+                    $floor->save();
                 }
-                $floor->bedroom=$request->bedroom[$i];
-                $floor->bathroom=$request->bathroom[$i];
-                $floor->rent=$request->rent[$i];
-                $floor->unit_size=$request->unit_size[$i];
-                $floor->availability=$request->availability[$i];
-                $floor->save();
             }
             CommercialBuilding::where("property_id",$property->id)->delete();
-            for ($i=0; $i <count($request->commercial_building_name) ; $i++) { 
-                $commercialBuilding=new CommercialBuilding;
-                $commercialBuilding->property_id=$property->id;
-                $commercialBuilding->name=$request->commercial_building_name[$i];
-                $commercialBuilding->save();
+            if(!empty($request->commercial_building_name)){
+                for ($i=0; $i <count($request->commercial_building_name) ; $i++) { 
+                    $commercialBuilding=new CommercialBuilding;
+                    $commercialBuilding->property_id=$property->id;
+                    $commercialBuilding->name=$request->commercial_building_name[$i];
+                    $commercialBuilding->save();
+                }
             }
             BuildingFeature::where("property_id",$property->id)->delete();
-            for ($i=0; $i <count($request->building_feature_name) ; $i++) { 
-                $buildingFeature=new BuildingFeature;
-                $buildingFeature->property_id=$property->id;
-                $buildingFeature->name=$request->building_feature_name[$i];
-                $buildingFeature->save();
+            if(!empty($request->building_feature_name)){
+                for ($i=0; $i <count($request->building_feature_name) ; $i++) { 
+                    $buildingFeature=new BuildingFeature;
+                    $buildingFeature->property_id=$property->id;
+                    $buildingFeature->name=$request->building_feature_name[$i];
+                    $buildingFeature->save();
+                }
             }
             UnitFeature::where("property_id",$property->id)->delete();
-            for ($i=0; $i <count($request->unit_feature_name) ; $i++) { 
-                $unitFeature=new UnitFeature;
-                $unitFeature->property_id=$property->id;
-                $unitFeature->name=$request->unit_feature_name[$i];
-                $unitFeature->save();
+            if(!empty($request->unit_feature_name)){
+                for ($i=0; $i <count($request->unit_feature_name) ; $i++) { 
+                    $unitFeature=new UnitFeature;
+                    $unitFeature->property_id=$property->id;
+                    $unitFeature->name=$request->unit_feature_name[$i];
+                    $unitFeature->save();
+                }
             }
             NearBy::where("property_id",$property->id)->delete();
-            for ($i=0; $i <count($request->near_by_name) ; $i++) { 
-                $nearBy=new NearBy;
-                $nearBy->property_id=$property->id;
-                $nearBy->name=$request->near_by_name[$i];
-                $nearBy->save();
-            }
+            if(!empty($request->near_by_name)){
+                for ($i=0; $i <count($request->near_by_name) ; $i++) { 
+                    $nearBy=new NearBy;
+                    $nearBy->property_id=$property->id;
+                    $nearBy->name=$request->near_by_name[$i];
+                    $nearBy->save();
+                }
+            }    
             if(!empty($request->date) && $request->date[0]!=null){
                 OpenHouseDate::where("property_id",$property->id)->whereNotIn('id',$request->open_house_id)->delete();
                 for ($i=0; $i <count($request->date) ; $i++) { 
@@ -317,7 +320,6 @@ class PropertyController extends Controller
                     $openHouseDate->save();
                 }
             }
-            session()->forget('propertyId');
             $response = ['status'=>true,"message" => "Property Updated Successfully"];
             return response($response, 200);
         }
@@ -354,7 +356,7 @@ class PropertyController extends Controller
 
     public function fileStore(Request $request)
     {
-
+        $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]/storage/propertyimage/";
         if ($request->file('file')) {
             $file = $request->file('file');
             $fileType = "image-";
@@ -366,17 +368,21 @@ class PropertyController extends Controller
         $propertyImage = new PropertyImage();
         $propertyImage->property_id=$request->property_id;
         $propertyImage->image = $filename;
-        $propertyImage->save();
+        if($propertyImage->save()){
+           $response = ['status'=>true,"message" => "Image Upload Successfully",'imagepath'=>$actual_link,'filename'=>$filename];
+           return response($response, 200);
+        }
 
-        $response = ['status'=>true,"message" => "Image Upload Successfully",'imagepath'=>$actual_link,'filename'=>$filename];
-        return response($response, 200);
+        $response = ['status'=>false,"message" => "Image Upload Successfully",'imagepath'=>$actual_link,'filename'=>$filename];
+        return response($response, 422);
         //return response()->json(['success'=>$filename]);
     }
 
     public function remvoeFile(Request $request)
     {
         $name =  $request->get('name');
-        PropertyImage::where(['image' => $name])->delete();
+        $property_id =  $request->get('property_id');
+        PropertyImage::where(['image' => $name])->where(['property_id' => $property_id])->delete();
         $response = ['status'=>true,"message" => "Image Delete Successfully",'name'=>$name];
         return response($response, 200);
         //return $name;
@@ -384,7 +390,7 @@ class PropertyController extends Controller
 
     public function remvoeImageByid(Request $request)
     {
-        $id =  $request->get('id');
+        $id =  $request->get('image_id');
         PropertyImage::where(['id' => $id])->delete();
         $response = ['status'=>true,"message" => "Image Delete Successfully",'id'=>$id];
         return response($response, 200);

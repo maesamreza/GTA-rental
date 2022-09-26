@@ -38,9 +38,9 @@ Route::group(['middleware' => ['auth:api']], function(){
     Route::get('/landlord/profile/view', 'App\Http\Controllers\Api\Landlord\Authcontroller@profile_view');
     Route::post('/landlord/change/password', 'App\Http\Controllers\Api\Landlord\Authcontroller@passwordChange');
     // property route
-
+    Route::post('/landlord/add/propertynew','App\Http\Controllers\Api\Landlord\PropertyController@addView');
     Route::post('/landlord/add/property','App\Http\Controllers\Api\Landlord\PropertyController@store');
-    Route::get('/landlord/veiw/property','App\Http\Controllers\Api\Landlord\PropertyController@index');
+    Route::get('/landlord/veiw/property/{id}','App\Http\Controllers\Api\Landlord\PropertyController@index');
     Route::get('/landlord/edit/property/{id}','App\Http\Controllers\Api\Landlord\PropertyController@edit');
     Route::post('/landlord/edit/propertyprocess','App\Http\Controllers\Api\Landlord\PropertyController@update');
     Route::get('/landlord/delete/property/{id}','App\Http\Controllers\Api\Landlord\PropertyController@delete');

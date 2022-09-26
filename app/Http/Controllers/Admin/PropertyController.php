@@ -400,7 +400,8 @@ class PropertyController extends Controller
     public function remvoeFile(Request $request)
     {
         $name =  $request->get('name');
-        PropertyImage::where(['image' => $name])->delete();
+        $property_id=session()->get('propertyId');
+        PropertyImage::where(['image' => $name])->where(['property_id' => $property_id])->delete();
         return $name;
     }
 
