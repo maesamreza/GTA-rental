@@ -20,6 +20,9 @@ use Illuminate\Support\Facades\Route;
 Route::post('/landlordlogin', '\App\Http\Controllers\Api\Authcontroller@landlordLogin');
 Route::post('/rentalLogin', '\App\Http\Controllers\Api\Authcontroller@rentalLogin');
 Route::post('/register', '\App\Http\Controllers\Api\Authcontroller@register');
+Route::get('veiw/property','App\Http\Controllers\Api\PropertyController@index');
+Route::get('detail/property/{id}','App\Http\Controllers\Api\PropertyController@edit');
+Route::post('search/property/byaddess','App\Http\Controllers\Api\PropertyController@searchPropertyByAddress');
 
 Route::group(['middleware' => ['auth:api']], function(){
 
@@ -36,14 +39,14 @@ Route::group(['middleware' => ['auth:api']], function(){
     Route::post('/landlord/change/password', 'App\Http\Controllers\Api\Landlord\Authcontroller@passwordChange');
     // property route
 
-    Route::post('/landlord/add/property','App\Http\Controllers\Api\PropertyController@store');
-    Route::get('/landlord/veiw/property','App\Http\Controllers\Api\PropertyController@index');
-    Route::get('/landlord/edit/property/{id}','App\Http\Controllers\Api\PropertyController@edit');
-    Route::post('/landlord/edit/propertyprocess','App\Http\Controllers\Api\PropertyController@update');
-    Route::get('/landlord/delete/property/{id}','App\Http\Controllers\Api\PropertyController@delete');
-    Route::post('/landlord/upload/propertyImage','\App\Http\Controllers\Api\PropertyController@fileStore');
-    Route::post('/landlord/remove/propertyImage','App\Http\Controllers\Api\PropertyController@remvoeFile');
-    Route::post('/landlord/remove/propertyImageById','App\Http\Controllers\Api\PropertyController@remvoeImageByid');
+    Route::post('/landlord/add/property','App\Http\Controllers\Api\Landlord\PropertyController@store');
+    Route::get('/landlord/veiw/property','App\Http\Controllers\Api\Landlord\PropertyController@index');
+    Route::get('/landlord/edit/property/{id}','App\Http\Controllers\Api\Landlord\PropertyController@edit');
+    Route::post('/landlord/edit/propertyprocess','App\Http\Controllers\Api\Landlord\PropertyController@update');
+    Route::get('/landlord/delete/property/{id}','App\Http\Controllers\Api\Landlord\PropertyController@delete');
+    Route::post('/landlord/upload/propertyImage','\App\Http\Controllers\Api\Landlord\PropertyController@fileStore');
+    Route::post('/landlord/remove/propertyImage','App\Http\Controllers\Api\Landlord\PropertyController@remvoeFile');
+    Route::post('/landlord/remove/propertyImageById','App\Http\Controllers\Api\Landlord\PropertyController@remvoeImageByid');
     
      // end property route
 
