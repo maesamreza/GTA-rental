@@ -31,7 +31,7 @@ class Property extends Model
 
     public function floor()
     {
-        return $this->hasMany(Floor::class, 'property_id','id');
+        return $this->hasMany(Floor::class, 'property_id','id')->orderBy('rent','ASC');
     }
 
     public function nearBy()
