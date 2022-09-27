@@ -84,6 +84,7 @@ Route::prefix('admin')->namespace('Admin')->group(function () {
         Route::post('/uploadpropertyImage',['as'=>'admin.uploadpropertyImage','uses'=>'\App\Http\Controllers\Admin\PropertyController@fileStore']);
         Route::post('/removepropertyImage',['as'=>'admin.removepropertyImage','uses'=>'\App\Http\Controllers\Admin\PropertyController@remvoeFile']);
         Route::post('/removepropertyImageById',['as'=>'admin.removepropertyImageById','uses'=>'\App\Http\Controllers\Admin\PropertyController@remvoeImageByid']);
+        Route::get('/property/status/change',['as'=>'admin.property.status.change','uses'=>'\App\Http\Controllers\Admin\PropertyController@statusChange']);
         // end property route
 
     });

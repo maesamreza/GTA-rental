@@ -377,6 +377,13 @@ class PropertyController extends Controller
 
     }
 
+    public function statusChange(Request $request){
+        $property = Property::where('id',$request->id)->first();
+        $property->is_active=$request->status;
+        $property->save();
+        return response(["status"=>true,"success" => "status updated"], 200);
+    }
+
     public function fileStore(Request $request)
     {
         // $image = $request->file('file');

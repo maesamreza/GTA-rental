@@ -26,6 +26,7 @@
                                             <th>Property SubType</th>
                                             <th>Address</th>
                                             <th>Status</th>
+                                            <th>Status Action</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
@@ -43,11 +44,19 @@
                                                             <span class="slider round"></span>
                                                         </label> --}}
                                                         @if($property_val->is_active==0)
-                                                            Not Approved
+                                                            Deactive
                                                         @else
-                                                             Approved
+                                                             Active
                                                         @endif
                                                     </td>
+                
+                                                    <td>
+                                                        <select class="form-select form-control status" data-id="{{$property_val->id}}">
+                                                            <option value="0" @if($property_val->is_active==0) selected @endif>Deactive</option>
+                                                            <option value="1" @if($property_val->is_active==1) selected @endif>Active</option>
+                                                        </select>
+                                                    </td>
+                        
                                                     <td>
                                                         <div class="row">
                                                             <div class="col-md-6">
@@ -74,4 +83,33 @@
             </div>
         </section>
     </div>
+@endsection
+@section('script')
+<script>
+    $(document).ready(function() {
+        //$('.status').on('change', function() {
+        $(document).on("change",".status",function(){
+            var status = $(this).val();
+            var id = $(this).data("id");
+            $.ajax({
+                url: "{{ route('admin.property.status.change') }}",
+                type: "GET",
+                data: {
+                    'status': status,
+                    'id': id
+                },
+                success: function(data) {
+                    location.reload();
+                    //$('#develop_list').html(data)
+                    //console.log(data);
+                }
+            });
+            //alert(id);
+        });
+    });
+
+    // $(document).ready( function () {
+    //     $('#ahmed').DataTable();
+    // } );
+</script>
 @endsection
