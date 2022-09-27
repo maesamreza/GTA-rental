@@ -196,6 +196,8 @@
             tinymce.init({
                 selector: '#step1'
             });
+
+            // end
             tinymce.init({
                 selector: '#step2'
             });
