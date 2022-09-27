@@ -12,7 +12,7 @@ class PropertyController extends Controller
 {
     public function index(){
         $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]/storage/propertyimage/";
-        $property=Property::with('propertyImage','buildingFeature','category','commercialBuilding','floor','nearBy','unitFeature','utilityInclude','openHouseDate')->where("is_updated2","!=",false)->where("is_updated","!=",false)->get();
+        $property=Property::with('propertyImage','buildingFeature','category','commercialBuilding','floor','nearBy','unitFeature','utilityInclude','openHouseDate')->where("is_updated2","!=",false)->where("is_updated","!=",false)->where("is_active","!=",0)->get();
         return response()->json(['property'=>$property,'imagepath'=>$actual_link],200);
     }
     
@@ -29,7 +29,7 @@ class PropertyController extends Controller
         $latitude=50.000000;
         $langitude=-85.000000;
 
-        $property=Property::with('propertyImage','buildingFeature','category','commercialBuilding','floor','nearBy','unitFeature','utilityInclude','openHouseDate')->where("is_updated2","!=",false)->where("is_updated","!=",false)->where('address','LIKE',"%".$req->address."%")->get();
+        $property=Property::with('propertyImage','buildingFeature','category','commercialBuilding','floor','nearBy','unitFeature','utilityInclude','openHouseDate')->where("is_updated2","!=",false)->where("is_updated","!=",false)->where("is_active","!=",0)->where('address','LIKE',"%".$req->address."%")->get();
         $popertyid=Property::where('address','LIKE',"%".$req->address."%")->first();
         if(!empty($popertyid)){
             $latitude  = $popertyid->lat;

@@ -13,7 +13,7 @@ class PropertyController extends Controller
     public function index($id){
         Property::where("is_updated2",false)->delete();
         $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]/storage/propertyimage/";
-        $property=Property::with('propertyImage','buildingFeature','category','commercialBuilding','floor','nearBy','unitFeature','utilityInclude','openHouseDate')->where("is_updated2","!=",false)->where('user_id',$id)->get();
+        $property=Property::with('propertyImage','buildingFeature','category','commercialBuilding','floor','nearBy','unitFeature','utilityInclude','openHouseDate')->where("is_updated2","!=",false)->where("is_active","!=",0)->where('user_id',$id)->get();
         return response()->json(['property'=>$property,'imagepath'=>$actual_link],200);
     }
 
