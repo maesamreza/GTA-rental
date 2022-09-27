@@ -19,8 +19,9 @@ class Authcontroller extends Controller
 
     public function profile_view(Request $request)
     {
+        $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]/storage/profile/";
         $user=auth('api')->user();
-        return response()->json(['admin_profile'=>$user],200);
+        return response()->json(['rental'=>$user,'imagepath'=>$actual_link],200);
     }
 
     public function profile_update(Request $request){
