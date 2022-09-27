@@ -17,8 +17,8 @@ class Authcontroller extends Controller
         // return response($response, 200);
         //dd($controlls);
         $rules = array(
-            //"first_name" => "required|max:100",
-            //"last_name" => "required|max:100",
+            "first_name" => "required|max:100",
+            "last_name" => "required|max:100",
             "phone_number" => "required|min:10|max:20",
             "email" => "required|email|unique:users,email",
             "password" => "required|min:6|confirmed",
@@ -39,8 +39,8 @@ class Authcontroller extends Controller
         }elseif($request->role=="landlord"){
             $user->role_id = 2; 
         }
-        // $user->first_name = $request->first_name;
-        // $user->last_name = $request->last_name;
+        $user->first_name = $request->first_name;
+        $user->last_name = $request->last_name;
         $user->phone_number = $request->phone_number;
         $user->email = $request->email;
         $user->password = bcrypt($request->password);	
@@ -63,59 +63,23 @@ class Authcontroller extends Controller
 
    }
 
-    public function landlordLogin(Request $request) {
-        $validator = Validator::make($request->all(), [
-            'email' => 'required|string|email|max:255',
-            'password' => 'required|string|min:6',
-        ]);
-        if ($validator->fails())
-        {
-            return response(['errors'=>$validator->errors()->all()], 422);
-        }
-        
-        $user = User::where('email', $request->email)->where('role_id', 2)->first();
-        if ($user) {
-            if (Hash::check($request->password, $user->password)) {
-                $token = $user->createToken('Laravel Password Grant Client')->accessToken;
-                //dd("ok");
-                $response = ['status'=>true,"message" => "Landlord Login Successfully",'token' => $token,'user'=>$user];
-                return response($response, 200);
-            } else {
-                $response = ['status'=>false,"message" => "Password mismatch"];
-                return response($response, 422);
-            }
-        } else {
-            $response = ['status'=>false,"message" =>'Landlord does not exist'];
-            return response($response, 422);
-        }
-    }
+    
+   
 
-    public function rentalLogin(Request $request) {
-        $validator = Validator::make($request->all(), [
-            'email' => 'required|string|email|max:255',
-            'password' => 'required|string|min:6',
-        ]);
-        if ($validator->fails())
-        {
-            return response(['errors'=>$validator->errors()->all()], 422);
-        }
-        
-        $user = User::where('email', $request->email)->where('role_id', 3)->first();
-        if ($user) {
-            if (Hash::check($request->password, $user->password)) {
-                $token = $user->createToken('Laravel Password Grant Client')->accessToken;
-                //dd("ok");
-                $response = ['status'=>true,"message" => "Rental Login Successfully",'token' => $token,'user'=>$user];
-                return response($response, 200);
-            } else {
-                $response = ['status'=>false,"message" => "Password mismatch"];
-                return response($response, 422);
-            }
-        } else {
-            $response = ['status'=>false,"message" =>'Rental does not exist'];
-            return response($response, 422);
-        }
-    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     public function logout (Request $request) {
         $token = $request->user()->token();
