@@ -9,6 +9,11 @@ class Property extends Model
 {
     use HasFactory;
 
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id','id');
+    }
+
     public function propertyImage()
     {
         return $this->hasMany(PropertyImage::class, 'property_id','id');

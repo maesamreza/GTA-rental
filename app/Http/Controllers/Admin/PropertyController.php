@@ -12,7 +12,7 @@ class PropertyController extends Controller
 {
     public function index(){
         Property::where("is_updated",false)->delete();
-        $property=Property::where("is_updated2","!=",false)->get();
+        $property=Property::with('user')->where("is_updated2","!=",false)->get();
         session()->forget('propertyId');
         return view('Admin.pages.property.property',compact('property'));
     }

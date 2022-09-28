@@ -104,6 +104,40 @@
             </div>
         </section>
     </div>
+    <div class="modal fade " id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content ">
+                <div class="modal-header colour">
+                    <h5 class="modal-title " id="exampleModalLabel">Contact Us</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form method="post" action="{{route('admin.contact.email')}}" class="row">
+                    @csrf
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="container">
+                                <div class="mb-3">
+                                    <label for="exampleInputEmail1" class="form-label">Email To:</label>
+                                    <input placeholder="Email" name="email" id="email" type="email" class="form-control"
+                                        id="exampleInputEmail1" required aria-describedby="emailHelp" readonly required>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Message</label>
+                                    <textarea rows="4" cols="60" name="message" required></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn bg-primary btn-lg text-white colour">Send </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 @endsection
 @section('script')
 <script>

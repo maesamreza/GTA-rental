@@ -22,6 +22,9 @@
                                     <thead>
                                         <tr>
                                             <th>Id</th>
+                                            <th>Added By</th>
+                                            <th>Email</th>
+                                            <th>Name</th>
                                             <th>Property Type</th>
                                             <th>Property SubType</th>
                                             <th>Address</th>
@@ -35,6 +38,9 @@
                                             @foreach($property as $key => $property_val)
                                                 <tr>
                                                     <td>{{$property_val->id}}</td>
+                                                    <td>@if(!empty($property_val->user) && $property_val->user->role_id==1) Admin @else Landlord @endif</td>
+                                                    <td>@if(!empty($property_val->user)){{$property_val->user->email}}@endif</td>
+                                                    <td>@if(!empty($property_val->user)){{$property_val->user->first_name}}@endif</td>
                                                     <td>{{$property_val->property_type}}</td>
                                                     <td>{{$property_val->sub_property_type}}</td>
                                                     <td>{{$property_val->address}}</td>
