@@ -63,23 +63,59 @@ class Authcontroller extends Controller
 
    }
 
-    
-   
+   public function landlordLogin(Request $request) {
+        $validator = Validator::make($request->all(), [
+            'email' => 'required|string|email|max:255',
+            'password' => 'required|string|min:6',
+        ]);
+        if ($validator->fails())
+        {
+            return response(['errors'=>$validator->errors()->all()], 422);
+        }
 
+        $user = User::where('email', $request->email)->where('role_id', 2)->first();
+        if ($user) {
+            if (Hash::check($request->password, $user->password)) {
+                $token = $user->createToken('Laravel Password Grant Client')->accessToken;
+                //dd("ok");
+                $response = ['status'=>true,"message" => "Landlord Login Successfully",'token' => $token,'user'=>$user];
+                return response($response, 200);
+            } else {
+                $response = ['status'=>false,"message" => "Password mismatch"];
+                return response($response, 422);
+            }
+        } else {
+            $response = ['status'=>false,"message" =>'Landlord does not exist'];
+            return response($response, 422);
+        }
+    }
 
+    public function rentalLogin(Request $request) {
+        $validator = Validator::make($request->all(), [
+            'email' => 'required|string|email|max:255',
+            'password' => 'required|string|min:6',
+        ]);
+        if ($validator->fails())
+        {
+            return response(['errors'=>$validator->errors()->all()], 422);
+        }
 
-
-
-
-
-
-
-
-
-
-
-
-
+        $user = User::where('email', $request->email)->where('role_id', 3)->first();
+        if ($user) {
+            if (Hash::check($request->password, $user->password)) {
+                $token = $user->createToken('Laravel Password Grant Client')->accessToken;
+                //dd("ok");
+                $response = ['status'=>true,"message" => "Rental Login Successfully",'token' => $token,'user'=>$user];
+                return response($response, 200);
+            } else {
+                $response = ['status'=>false,"message" => "Password mismatch"];
+                return response($response, 422);
+            }
+        } else {
+            $response = ['status'=>false,"message" =>'Rental does not exist'];
+            return response($response, 422);
+        }
+    }
 
     public function logout (Request $request) {
         $token = $request->user()->token();
