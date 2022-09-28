@@ -86,6 +86,7 @@ Route::prefix('admin')->namespace('Admin')->group(function () {
         Route::post('/removepropertyImageById',['as'=>'admin.removepropertyImageById','uses'=>'\App\Http\Controllers\Admin\PropertyController@remvoeImageByid']);
         Route::get('/property/status/change',['as'=>'admin.property.status.change','uses'=>'\App\Http\Controllers\Admin\PropertyController@statusChange']);
         // end property route
+        Route::post('/contact/email',['as'=>'admin.contact.email','uses'=>'\App\Http\Controllers\Admin\ContactUsController@contact_us']);
 
     });
 });

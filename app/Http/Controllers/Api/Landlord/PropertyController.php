@@ -77,7 +77,12 @@ class PropertyController extends Controller
         $property =Property::find($id);
         //dd($property);
         $property->property_type = $request->property_type;
-        $property->sub_property_type = $request->sub_property_type;
+        //$property->sub_property_type = $request->sub_property_type;
+        if(!empty($request->sub_property_type)){
+            $property->sub_property_type = $request->sub_property_type;
+        }else{
+            $property->sub_property_type =null;
+        }
         $property->address = $request->address;
         $property->lat = $request->lat;
         $property->lng = $request->lng;
@@ -216,7 +221,12 @@ class PropertyController extends Controller
         $property =Property::find($id);
         //dd($property);
         $property->property_type = $request->property_type;
-        $property->sub_property_type = $request->sub_property_type;
+        //$property->sub_property_type = $request->sub_property_type;
+        if(!empty($request->sub_property_type)){
+            $property->sub_property_type = $request->sub_property_type;
+        }else{
+            $property->sub_property_type =null;
+        }
         $property->address = $request->address;
         $property->lat = $request->lat;
         $property->lng = $request->lng;

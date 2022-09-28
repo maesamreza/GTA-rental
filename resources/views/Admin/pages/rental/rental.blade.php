@@ -47,6 +47,7 @@
                                             <th>Last Name</th>
                                             <th>Phone Number</th>
                                             <th>Email</th>
+                                            <th>Contact Email</th>
                                             <th>Picture</th>
                                             <th>Action</th>
                                         </tr>
@@ -60,6 +61,12 @@
                                                     <td>{{$customer_value->last_name}}</td>
                                                     <td>{{$customer_value->phone_number}}</td>
                                                     <td>{{$customer_value->email}}</td>
+                                                    <td>
+                                                         <a href="javascript:void(0)" data-email="{{$customer_value->email}}" class="btn btn-success rounded contact-us"
+                                                                    title="Add">
+                                                                    Contact Email
+                                                                </a>
+                                                    </td>
                                                     <td>
                                                         <img src="{{ asset('storage/profile/' . $customer_value->image) }}" alt="no img " width="50px"
                                                             height="50px" class="img-thumbnail">
@@ -97,4 +104,21 @@
             </div>
         </section>
     </div>
+@endsection
+@section('script')
+<script>
+    $(document).ready(function() {
+        //$('.status').on('change', function() {
+        $(document).on("click",".contact-us",function(){
+            var email = $(this).data("email");
+             $('#email').val(email);
+              $('#exampleModal').modal('show');
+            //alert(email);
+        });
+    });
+
+    // $(document).ready( function () {
+    //     $('#ahmed').DataTable();
+    // } );
+</script>
 @endsection
