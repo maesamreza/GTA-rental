@@ -21,7 +21,7 @@
                             <div class="card-icon card-icon-large"><i class="fa fa-award"></i></div>
                             <div class="card-content">
                                 <h4 class="card-title">Property</h4>
-                                <h6>524</h6>
+                                <h6>{{$property}}</h6>
 
                             </div>
                         </div>
@@ -33,7 +33,7 @@
                             <div class="card-icon card-icon-large"><i class="fa fa-briefcase"></i></div>
                             <div class="card-content">
                                 <h4 class="card-title">LandLord</h4>
-                                <h6>1,258</h6>
+                                <h6>{{$landlord}}</h6>
 
                             </div>
                         </div>
@@ -44,8 +44,8 @@
                         <div class="card-statistic-3">
                             <div class="card-icon card-icon-large"><i class="fa fa-globe"></i></div>
                             <div class="card-content">
-                                <h4 class="card-title">User</h4>
-                                <h6>10,225</h6>
+                                <h4 class="card-title">Rental</h4>
+                                <h6>{{$rental}}</h6>
 
                             </div>
                         </div>
