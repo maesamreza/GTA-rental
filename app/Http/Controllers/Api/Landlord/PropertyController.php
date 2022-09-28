@@ -13,7 +13,7 @@ class PropertyController extends Controller
     public function index($id){
         Property::where("is_updated2",false)->delete();
         $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]/storage/propertyimage/";
-        $property=Property::with('propertyImage','buildingFeature','category','commercialBuilding','floor','nearBy','unitFeature','utilityInclude','openHouseDate')->where("is_updated2","!=",false)->where("is_active","!=",0)->where('user_id',$id)->get();
+        $property=Property::with('propertyImage','buildingFeature','category','commercialBuilding','floor','nearBy','unitFeature','utilityInclude','openHouseDate')->where("is_updated2","!=",false)->where('user_id',$id)->get();
         return response()->json(['property'=>$property,'imagepath'=>$actual_link],200);
     }
 
@@ -94,7 +94,7 @@ class PropertyController extends Controller
         $property->parking_type = $request->parking_type;
         $property->short_term = $request->short_term;
         $property->description = $request->description;
-        $property->is_active = 1;
+        $property->is_active = 0;
         $property->is_updated = 1;
         $property->is_updated2 = 1;
         if($property->save()){
@@ -238,7 +238,7 @@ class PropertyController extends Controller
         $property->parking_type = $request->parking_type;
         $property->short_term = $request->short_term;
         $property->description = $request->description;
-        $property->is_active = 1;
+        $property->is_active = 0;
         $property->is_updated = 1;
         $property->is_updated2 = 1;
         if($property->save()){
