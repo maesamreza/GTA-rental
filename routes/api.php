@@ -59,6 +59,19 @@ Route::group(['middleware' => ['auth:api']], function(){
     Route::get('/rental/profile/view', 'App\Http\Controllers\Api\Rental\Authcontroller@profile_view');
     Route::post('/rental/change/password', 'App\Http\Controllers\Api\Rental\Authcontroller@passwordChange');
 
+    // property route
+    Route::post('/rental/add/propertynew','App\Http\Controllers\Api\Rental\PropertyController@addView');
+    Route::post('/rental/add/property','App\Http\Controllers\Api\Rental\PropertyController@store');
+    Route::get('/rental/veiw/property/{id}','App\Http\Controllers\Api\Rental\PropertyController@index');
+    Route::get('/rental/edit/property/{id}','App\Http\Controllers\Api\Rental\PropertyController@edit');
+    Route::post('/rental/edit/propertyprocess','App\Http\Controllers\Api\Rental\PropertyController@update');
+    Route::get('/rental/delete/property/{id}','App\Http\Controllers\Api\Rental\PropertyController@delete');
+    Route::post('/rental/upload/propertyImage','\App\Http\Controllers\Api\Rental\PropertyController@fileStore');
+    Route::post('/rental/remove/propertyImage','App\Http\Controllers\Api\Rental\PropertyController@remvoeFile');
+    Route::post('/rental/remove/propertyImageById','App\Http\Controllers\Api\Rental\PropertyController@remvoeImageByid');
+    
+     // end property route
+
 
    /// start Rental Route
 

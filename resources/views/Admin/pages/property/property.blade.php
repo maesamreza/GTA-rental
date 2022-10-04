@@ -38,7 +38,7 @@
                                             @foreach($property as $key => $property_val)
                                                 <tr>
                                                     <td>{{$property_val->id}}</td>
-                                                    <td>@if(!empty($property_val->user) && $property_val->user->role_id==1) Admin @else Landlord @endif</td>
+                                                    <td>@if(!empty($property_val->user) && $property_val->user->role_id==1) Admin @elseif(!empty($property_val->user) && $property_val->user->role_id==2) Landlord @else Rental @endif</td>
                                                     <td>@if(!empty($property_val->user)){{$property_val->user->email}}@endif</td>
                                                     <td>@if(!empty($property_val->user)){{$property_val->user->first_name}}@endif</td>
                                                     <td>{{$property_val->property_type}}</td>

@@ -1,12 +1,9 @@
 <?php
 
-namespace App\Http\Controllers\Api\Landlord;
+namespace App\Http\Controllers\Api\Rental;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Validator;
-use App\Models\{Property,UtilityInclude,Category,Floor,BuildingFeature,CommercialBuilding,NearBy,UnitFeature,OpenHouseDate,PropertyImage};
-use Illuminate\Support\Facades\{DB,Mail,Auth,Hash};
 
 class PropertyController extends Controller
 {
