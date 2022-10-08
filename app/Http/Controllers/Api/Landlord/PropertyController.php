@@ -366,6 +366,19 @@ class PropertyController extends Controller
 
     public function fileStore(Request $request)
     {
+        $controlls = $request->all();
+        //dd($controlls);
+        $id=$request->property_id;
+        //dd($id);
+        $rules = array(
+            "property_id" => "required",
+            "file" => "required|image|mimes:jpeg,png,jpg",
+        );
+
+        $validator = Validator::make($controlls, $rules);
+        if ($validator->fails()) {
+            return response(['errors'=>$validator->errors()->all()], 422);
+        }
         $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]/storage/propertyimage/";
         if ($request->file('file')) {
                 $file = $request->file('file');
