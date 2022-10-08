@@ -368,19 +368,20 @@ class PropertyController extends Controller
     {
         $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]/storage/propertyimage/";
         if ($request->file('file')) {
-            $file = $request->file('file');
-            $fileType = "image-";
-            //$filename = $file->getClientOriginalExtension();
-            $filename = $file->getClientOriginalName();
-            //$filename = $fileType.time()."-".rand().".".$file->getClientOriginalExtension();
-            $file->storeAs("/public/propertyimage", $filename);
-        }
-        $propertyImage = new PropertyImage();
-        $propertyImage->property_id=$request->property_id;
-        $propertyImage->image = $filename;
-        if($propertyImage->save()){
-           $response = ['status'=>true,"message" => "Image Upload Successfully",'imagepath'=>$actual_link,'filename'=>$filename];
-           return response($response, 200);
+                $file = $request->file('file');
+                $fileType = "image-";
+                //$filename = $file->getClientOriginalExtension();
+                $filename = $file->getClientOriginalName();
+                //$filename = $fileType.time()."-".rand().".".$file->getClientOriginalExtension();
+                $file->storeAs("/public/propertyimage", $filename);
+        
+            $propertyImage = new PropertyImage();
+            $propertyImage->property_id=$request->property_id;
+            $propertyImage->image = $filename;
+            if($propertyImage->save()){
+            $response = ['status'=>true,"message" => "Image Upload Successfully",'imagepath'=>$actual_link,'filename'=>$filename];
+            return response($response, 200);
+            }
         }
 
         $response = ['status'=>false,"message" => "Image Upload Successfully",'imagepath'=>$actual_link,'filename'=>$filename];
