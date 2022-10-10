@@ -363,6 +363,9 @@ class PropertyController extends Controller
 
     public function fileStore(Request $request)
     {
+        $controlls = $request->all();
+        //dd($controlls);
+        $id=$request->property_id;
         $rules = array(
             "property_id" => "required",
             "file" => "required|image|mimes:jpeg,png,jpg",
