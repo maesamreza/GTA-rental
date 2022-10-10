@@ -362,23 +362,20 @@ class PropertyController extends Controller
 
     public function permission(Request $request){
     
-        $user =Property::find($request->id);
+        $property =Property::with('user')->find($request->id);
         $status="";
-        if($user->is_active==1){
-          $user->is_active =0;
+        if($property->is_active==1){
+          $property->is_active =0;
           $status="Deactive";
         }else{
-          $user->is_active =1;
+          $property->is_active =1;
           $status="Active"; 
         }
-        if($user->save()){
-            return redirect()->back()->withSuccess("Property $status Successfully");
-            //return redirect()->route('user.login');
-            // Mail::send('user.email.verify_code', ['verify_code' =>$verify_code], function ($message) use($request) {
-            //     $message->from('emailforhnh@gmail.com', 'Confirmation');
-            //     $message->to($request->email);
-            //     $message->subject('Verify Code');
-            // });
+        $email=$property->user->email;
+        if($property->save()){
+           // return redirect()->back()->withSuccess("Property $status Successfully");
+            //return redirect()->route('property.login');
+            
             // return redirect()->route('user.verify',$user->id);
         }
         $request->session()->put('alert', 'danger');
@@ -390,6 +387,18 @@ class PropertyController extends Controller
         $property = Property::where('id',$request->id)->first();
         $property->is_active=$request->status;
         $property->save();
+        $status="";
+        if($request->status==1){
+          $status="Active";
+        }else{
+          $status="Deactive"; 
+        }
+        $email=$property->user->email;
+        Mail::send('email_template.property_permission', ['status' =>$status], function ($message) use($email) {
+            $message->from(env('MAIL_FROM_ADDRESS'),'Gta Rental');
+            $message->to($email);
+            $message->subject('Property Permission');
+        });
         return response(["status"=>true,"success" => "status updated"], 200);
     }
 
