@@ -732,18 +732,30 @@
                var property_type=$(this).val();
                //alert(property_type);
                if(property_type=="Apartment"){
+                $('#sub_property_type').attr('name', 'sub_property_type');
+                $("#sub_property_type2").removeAttr('name')
+                $("#sub_property_type3").removeAttr('name')
                  $('#apartment_type').show()
                  $('#house_type').hide()
                  $('#room_type').hide()
                }else if(property_type=="House"){
+                 $('#sub_property_type2').attr('name', 'sub_property_type');
+                $("#sub_property_type").removeAttr('name')
+                $("#sub_property_type3").removeAttr('name')
                  $('#apartment_type').hide()
                  $('#house_type').show()
                  $('#room_type').hide()
                }else if(property_type=="Room"){
+                 $('#sub_property_type3').attr('name', 'sub_property_type');
+                 $("#sub_property_type").removeAttr('name')
+                 $("#sub_property_type2").removeAttr('name')
                  $('#apartment_type').hide()
                  $('#house_type').hide()
                  $('#room_type').show()
                }else{
+                 $("#sub_property_type").removeAttr('name')
+                 $("#sub_property_type2").removeAttr('name')
+                 $("#sub_property_type3").removeAttr('name')
                  $('#apartment_type').hide()
                  $('#house_type').hide()
                  $('#room_type').hide()

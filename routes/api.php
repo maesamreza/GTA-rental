@@ -23,7 +23,7 @@ Route::post('/register', '\App\Http\Controllers\Api\Authcontroller@register');
 Route::get('veiw/property','App\Http\Controllers\Api\PropertyController@index');
 Route::get('detail/property/{id}','App\Http\Controllers\Api\PropertyController@edit');
 Route::get('search/property/byaddess','App\Http\Controllers\Api\PropertyController@searchPropertyByAddress');
-Route::get('search/property/advance','App\Http\Controllers\Api\PropertyController@searchPropertyByAdvanceFilter');
+Route::post('search/property/advance','App\Http\Controllers\Api\PropertyController@searchPropertyByAdvanceFilter');
 Route::post('contactus/property','App\Http\Controllers\Api\ContactUsController@contact_us');
 
 Route::group(['middleware' => ['auth:api']], function(){

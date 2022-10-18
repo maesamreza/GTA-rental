@@ -20,8 +20,8 @@ return new class extends Migration
             $table->string('property_type')->nullable();
             $table->string('sub_property_type')->nullable();
             $table->string('address')->nullable();
-            $table->double('lat')->nullable();
-            $table->double('lng')->nullable();
+            $table->string('lat')->nullable();
+            $table->string('lng')->nullable();
             $table->string('unit')->nullable();
             $table->string('year_build')->nullable();
             $table->string('pet_friendly')->nullable();

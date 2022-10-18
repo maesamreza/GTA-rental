@@ -37,7 +37,7 @@ class PropertyController extends Controller
         }
         //dd($develops);
         $total = count($property);
-        if(!empty($property)){
+        if(!$property->isEmpty()){
             return response(["status"=>true,"success" => "Property Get Successfully",'property'=>$property,'latitude'=>$latitude,'langitude'=>$langitude,'total'=>$total,'imagepath'=>$actual_link], 200);
         }
         return response(["status"=>false,"success" => "Property Not Get Successfully",'property'=>$property,'latitude'=>$latitude,'langitude'=>$langitude,'total'=>$total,'imagepath'=>$actual_link], 422);
@@ -54,6 +54,8 @@ class PropertyController extends Controller
         $endRent=0;
         $bedroom=0;
         $property_type=[];
+        
+       // return response(["status"=>true,"success" => "Property Get Successfully",'property'=>$req->all()], 200);
 
         if(!empty($req->startRent)){
             $startRent =$req->startRent; 
@@ -177,7 +179,7 @@ class PropertyController extends Controller
         }
         //dd($develops);
         $total = count($property);
-        if(!empty($property)){
+        if(!$property->isEmpty()){
             return response(["status"=>true,"success" => "Property Get Successfully",'property'=>$property,'latitude'=>$latitude,'langitude'=>$langitude,'total'=>$total,'imagepath'=>$actual_link], 200);
         }
         return response(["status"=>false,"success" => "Property Not Get Successfully",'property'=>$property,'latitude'=>$latitude,'langitude'=>$langitude,'total'=>$total,'imagepath'=>$actual_link], 422);
