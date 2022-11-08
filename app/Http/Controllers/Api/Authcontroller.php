@@ -17,8 +17,8 @@ class Authcontroller extends Controller
         // return response($response, 200);
         //dd($controlls);
         $rules = array(
-            "first_name" => "required|max:100",
-            "last_name" => "required|max:100",
+            //"first_name" => "required|max:100",
+            //"last_name" => "required|max:100",
             "phone_number" => "required|min:10|max:20",
             "email" => "required|email|unique:users,email",
             "password" => "required|min:6|confirmed",
@@ -39,8 +39,8 @@ class Authcontroller extends Controller
         }elseif($request->role=="landlord"){
             $user->role_id = 2; 
         }
-        $user->first_name = $request->first_name;
-        $user->last_name = $request->last_name;
+        //$user->first_name = $request->first_name;
+        //$user->last_name = $request->last_name;
         $user->phone_number = $request->phone_number;
         $user->email = $request->email;
         $user->password = bcrypt($request->password);	
@@ -63,7 +63,7 @@ class Authcontroller extends Controller
 
    }
 
-   public function landlordLogin(Request $request) {
+    public function landlordLogin(Request $request) {
         $validator = Validator::make($request->all(), [
             'email' => 'required|string|email|max:255',
             'password' => 'required|string|min:6',
